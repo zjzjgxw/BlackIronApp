@@ -1,0 +1,26 @@
+<!--pages/common/product/productList.wxml-->
+<!-- <scroll-view bindscrolltolower="getMoreData" scroll-y lower-threshold="80"> -->
+<scroll-view>
+  <view class="list-container"  >
+    <view class="card" wx:for="{{products}}" wx:for-index="index"  wx:for-item="item" >
+      <view class="card-image">
+        <image class="userinfo-avatar"
+          src="{{item.coverUrl}}" mode="cover"></image>
+      </view>
+      <view class="card-meta">
+        <view class="card-title">
+          <p>{{item.name}}</p>
+        </view>
+        <view class="card-price">
+          <view>
+            <p>${{item.price}}</p>
+          </view>
+          <view>
+            <image class="userinfo-avatar" src="../../../images/index/cart.png" mode="cover"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</scroll-view>

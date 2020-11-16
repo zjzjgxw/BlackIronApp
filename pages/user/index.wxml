@@ -1,0 +1,95 @@
+<!--pages/user/index.wxml-->
+<view>
+	<view class="user-container">
+
+		<view wx:if="{{!userInfo}}">
+			<view class="userinfo" bindtap="handleLogin">
+				<image class="userinfo-avatar" src="../../images/user/login.png" mode="cover"></image>
+				<text class="userinfo-nickname">点击登录</text>
+			</view>
+		</view>
+		<view wx:if="{{userInfo}}">
+			<view class="userinfo">
+				<image class="userinfo-avatar" src="{{userInfo.profileUrl}}" mode="cover"></image>
+				<text class="userinfo-nickname">{{userInfo.name}}</text>
+			</view>
+		</view>
+	</view>
+	<view class="wrapper-container">
+		<view class="info-container">
+			<view class="info-item">
+				<p class="p-number">
+					10
+				</p>
+				<p class="p-text">
+					积分
+				</p>
+			</view>
+			<view class="info-item">
+				<p class="p-number">
+					0
+				</p>
+				<p class="p-text">
+					返现
+				</p>
+			</view>
+			<view class="info-item">
+				<p class="p-number">
+					0
+				</p>
+				<p class="p-text">
+					优惠券
+				</p>
+			</view>
+		</view>
+
+		<view class="order-container">
+			<view class="flex-container">
+				<view class="inner-item">
+					<p class="title"> 我的订单 </p>
+				</view>
+				<view class="inner-item">
+					<view style="position:relative; display:flex">
+						<view style="position:absolute;  right:40rpx">
+							<p class="desc"> 查看全部订单 </p>
+						</view>
+						<view class="icon-v-right" style="" />
+					</view>
+				</view>
+			</view>
+			<!-- 分割线 -->
+			<view class="divLine"></view>
+
+			<view class="flex-container">
+				<view class="item">
+					<image src="../../images/user/waitPay.png" mode="cover"></image>
+					<p> 待付款 </p>
+
+				</view>
+				<view class="item">
+					<image src="../../images/user/waitSend.png" mode="cover"></image>
+					<p> 待发货 </p>
+
+				</view>
+				<view class="item">
+					<image src="../../images/user/waitConfirm.png" mode="cover"></image>
+					<p> 待收货 </p>
+				</view>
+				<view class="item">
+					<image src="../../images/user/waitComment.png" mode="cover"></image>
+					<p> 待评价 </p>
+				</view>
+				<view class="item">
+					<image src="../../images/user/refund.png" mode="cover"></image>
+					<p> 待退款 </p>
+				</view>
+			</view>
+		</view>
+
+
+		<product-list>
+		</product-list>
+
+	</view>
+
+</view>

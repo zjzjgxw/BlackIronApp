@@ -1,0 +1,137 @@
+/* pages/user/index.wxss */
+page {
+  --left-width: 16rpx;
+  --space-height: 20rpx;
+  background-color: #eaeaea;
+}
+
+
+.user-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50rpx 0;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.wrapper-container {
+  padding: 20rpx 20rpx;
+}
+
+.info-container {
+  display: flex;
+  height: 100rpx;
+  border-radius: 25rpx;
+  border-width: 2rpx;
+  border-color: #eaeaea;
+  background-color: #ffffff;
+  margin-bottom: 20rpx;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 33.3%;
+}
+
+.info-item .p-number {
+  padding-top: 10rpx;
+}
+
+.info-item .p-text {
+  font-size: 24rpx;
+  opacity: 0.5;
+  padding-bottom: 5rpx;
+}
+
+.divLine {
+  background: #000000;
+  opacity: 0.1;
+  width: 100%;
+  height: 2rpx;
+}
+
+.title {
+  font-size: 30rpx;
+}
+
+.desc {
+  font-size: 24rpx;
+  opacity: 0.5;
+}
+
+.inner-item {
+  width: 50%;
+  margin-left: var(--left-width);
+  margin-bottom: var(--space-height);
+  margin-top: var(--space-height);
+}
+
+
+.icon-v-right {
+  width: 14rpx;
+  height: 14rpx;
+  border-top: 4rpx solid #111111;
+  border-right: 4rpx solid #111111;
+  opacity: 0.5;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 16rpx;
+  right: 20rpx;
+}
+
+.order-container {
+  border-radius: 25rpx;
+  border-width: 2rpx;
+  border-color: #eaeaea;
+  background-color: #ffffff;
+
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-container .item {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14rpx;
+  padding-bottom: 14rpx;
+  margin-top: var(--space-height);
+  margin-bottom: var(--space-height);
+}
+
+.flex-container .item image {
+  width: 56rpx;
+  height: 56rpx;
+}
+
+.flex-container .item p {
+  font-size: 24rpx;
+}

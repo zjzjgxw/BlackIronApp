@@ -1,0 +1,12 @@
+<!--pages/article/create.wxml-->
+<view>
+	<button bindtap="chooseVideo">
+		上传视频
+	</button>
+	<video src="{{videoSrc}}"></video>
+	<form catchsubmit="formSubmit">
+		<input placeholder="请输入标题" maxlength="50" name="title"></input>
+		<textarea placeholder="描述"  maxlength="500" name="content"></textarea>
+		<button style="margin: 30rpx 0" type="primary" formType="submit">创建</button>
+	</form>
+</view>
