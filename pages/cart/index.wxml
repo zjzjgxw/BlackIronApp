@@ -1,0 +1,53 @@
+<!--pages/cart/index.wxml-->
+
+<view>
+
+  <view class="slidecells" wx:for="{{cart}}" wx:for-index="index" wx:for-item="item">
+    <mp-slideview buttons="{{slideButtons}}" icon="{{true}}"  data-item="{{item}}"   bindbuttontap="deleteItem">
+      <view class="prodcut-container">
+        <view class="radio-swapper">
+          <radio color="#fb504b"  data-item="{{item}}" checked="{{item.isSelected}}"  bindtap="handleRadioChange" />
+        </view>
+        <view class="item-swapper">
+          <view>
+            <image src="{{item.coverUrl}}" mode="cover"></image>
+          </view>
+          <view class="info">
+            <view class="title">
+              <view class="name">{{item.name}} </view>
+              <view>
+                <p wx:if="{{item.firstValue}}">{{item.firstValue}}</p>
+                <p wx:if="{{item.secondValue}}">{{item.secondValue}}</p>
+              </view>
+
+            </view>
+            <view class="num-container">
+              <view class="price">
+                <p> ￥{{item.price}}</p>
+              </view>
+              <view class="num-buttons">
+                <view class="wapper">
+                  <view class="sub-button" data-item="{{item}}"  bindtap="handleSub">
+                    <p>-</p>
+                  </view>
+                  <view class="num-text">
+                    <p>{{item.num}}</p>
+                  </view>
+                  <view class="add-button" data-item="{{item}}" bindtap="handleAdd">
+                    <p>+</p>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </mp-slideview>
+  </view>
+
+
+  <view class="bottom-container">
+    ￥{{totalPrice}}
+  </view>
+
+</view>

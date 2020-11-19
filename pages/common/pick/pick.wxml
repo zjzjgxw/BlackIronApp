@@ -1,0 +1,81 @@
+<!--pages/common/pick/pick.wxml-->
+<view class="pick-container" hidden="{{isHidden}}">
+  <view class="pick-swapper">
+    <view class="info-container">
+      <view class="image-show">
+        <image src="{{imgUrl}}" mode="cover"></image>
+      </view>
+      <view class="price-show">
+        <view>
+          <p class="price-p" wx:if="{{price}}">￥{{price}}</p>
+          <p class="last-num" wx:if="{{lastNum}}"> 剩余{{lastNum}}</p>
+        </view>
+        <view wx:if="{{hasSpecifications}}">
+          <p wx:if="{{chosedFirst}}">已选择:</p>
+          <p wx:if="{{chosedFirst}}">{{chosedFirst}};</p>
+          <p wx:if="{{chosedSecond}}">{{chosedSecond}}</p>
+        </view>
+      </view>
+    </view>
+    <!-- 分割线 -->
+    <view class="divLine"></view>
+
+    <vew wx:if="{{firstName}}" class="specification-container">
+      <view class="title">
+        <p>{{firstName}}</p>
+      </view>
+      <view class="options">
+        <view wx:for="{{firstOptions}}" wx:for-index="index" wx:for-item="item" data-item="{{item}}"  style="background-color:{{firstOptionsColor[item]}}"   bindtap="handleFirstSelected">
+          <!-- <image src="{{imgUrl}}" mode="cover"></image> -->
+          <p>{{item}}</p>
+        </view>
+      </view>
+      <view class="divLine"></view>
+
+    </vew>
+    <!-- 分割线 -->
+    <vew wx:if="{{secondName}}" class="specification-container">
+      <view class="title">
+        <p>{{secondName}}</p>
+      </view>
+      <view class="options">
+        <view wx:for="{{secondOptions}}" wx:for-index="index" wx:for-item="item" data-item="{{item}}" style="background-color:{{secondOptionsColor[item]}}"   bindtap="handleSecondSelected" >
+          <!-- <image src="{{imgUrl}}" mode="cover"></image> -->
+          <p>{{item}}</p>
+        </view>
+      </view>
+      <view class="divLine"></view>
+    </vew>
+
+    <view class="num-container">
+      <view class="title">
+        <p> 购买数量</p>
+      </view>
+      <view class="num-buttons">
+        <view class="wapper">
+          <view  class="sub-button"  bindtap="handleSub">
+          <p>-</p>  
+          </view>
+          <view class="num-text">
+            <p>{{num}}</p>
+          </view>
+           <view  class="add-button" bindtap="handleAdd">
+             <p>+</p>
+           </view>
+        </view>
+      </view>
+    </view>
+
+   <view class="bottom-container">
+      <button wx:if="{{type == 'cart'}}"  class="bottom-button" plain="true" bindtap="addCart" >加入购物车</button>
+      <button wx:if="{{type == 'buy'}}"  class="bottom-button" plain="true">下一步</button>
+   </view>
+  
+   <view class="closs-button" bindtap="handleClose">×
+   </view>
+
+
+
+  </view>
+
+</view>

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "pick-product":"../common/pick/pick",
+    "product-list": "../common/product/productList"
+  }
+}

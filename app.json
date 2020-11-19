@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/user/index",
-    "pages/article/create"
+    "pages/article/create",
+    "pages/product/detail",
+    "pages/cart/index"
   ],
   "tabBar": {
     "color": "#cdcdcd",
@@ -14,6 +16,11 @@
         "iconPath": "images/index/unselect_home.png",
         "pagePath": "pages/index/index",
         "text": "首页"
+      },{
+        "selectedIconPath": "images/index/cart_black.png",
+        "iconPath": "images/index/unselect_cart.png",
+        "pagePath": "pages/cart/index",
+        "text": "购物车"
       },
       {
         "selectedIconPath": "images/user/mine.png",
@@ -30,5 +37,9 @@
     "navigationBarTextStyle": "black"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "useExtendedLib": {
+    "kbone": true,
+    "weui": true
+  }
 }

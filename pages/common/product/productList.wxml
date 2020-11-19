@@ -1,8 +1,15 @@
 <!--pages/common/product/productList.wxml-->
 <!-- <scroll-view bindscrolltolower="getMoreData" scroll-y lower-threshold="80"> -->
 <scroll-view>
+  <view>
+       <view class="title">
+         {{title}}
+       </view>
+       		<!-- 分割线 -->
+			<view class="divLine"></view>
+  </view>
   <view class="list-container"  >
-    <view class="card" wx:for="{{products}}" wx:for-index="index"  wx:for-item="item" >
+      <view class="card"   wx:for="{{products}}" wx:for-index="index"  wx:for-item="item" data-item-id="{{item.id}}"  bindtap="handleClick" >
       <view class="card-image">
         <image class="userinfo-avatar"
           src="{{item.coverUrl}}" mode="cover"></image>
@@ -21,6 +28,7 @@
         </view>
       </view>
     </view>
+    
 
   </view>
 </scroll-view>

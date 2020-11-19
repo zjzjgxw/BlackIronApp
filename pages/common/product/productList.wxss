@@ -42,6 +42,17 @@
   overflow: hidden;
 }
 
+.title{
+  font-size: 28rpx;
+}
+
+.divLine {
+  background: #000000;
+  opacity: 0.1;
+  width: 100%;
+  height: 2rpx;
+}
+
 .card .card-meta .card-price{
   display: flex;
 }

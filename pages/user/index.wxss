@@ -2,7 +2,7 @@
 page {
   --left-width: 16rpx;
   --space-height: 20rpx;
-  background-color: #eaeaea;
+  background-color: #f8f8f8;
 }
 
 

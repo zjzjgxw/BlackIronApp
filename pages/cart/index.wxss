@@ -1,0 +1,108 @@
+/* pages/cart/index.wxss */
+page {
+  background-color: #f8f8f8;
+}
+
+
+
+.slidecells{
+  width: 100%;
+  margin-top: 40rpx;
+}
+
+.prodcut-container{
+  background-color: #ffffff;
+  display: flex;
+}
+
+.prodcut-container .item-swapper{
+  display: flex;
+}
+
+.prodcut-container .radio-swapper{
+  display: flex;
+  align-items: center;
+  margin-right: 20rpx;
+  margin-left: 20rpx;
+}
+
+.prodcut-container .item-swapper view image{
+  width: 160rpx;
+  height: 160rpx;
+  margin-top: 10rpx;
+  border-radius: 10rpx;
+  margin-right: 10rpx;
+}
+
+.prodcut-container .item-swapper .info{
+  padding-right: 10rpx;
+}
+
+.prodcut-container .item-swapper .info .title{
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.prodcut-container .item-swapper .info .title .name{
+  font-size: 28rpx;
+  opacity: 0.8;
+  max-height: 80rpx;
+  overflow: hidden;
+}
+
+.prodcut-container .item-swapper .info .title view p{
+  font-size: 24rpx;
+  opacity: 0.5;
+  margin-right: 10rpx;
+}
+
+
+.num-container{
+  display: flex;
+}
+
+.num-container .price{
+  font-size: 28rpx;
+  color: #fb504b;
+}
+
+
+.num-buttons{
+  display: flex;
+}
+
+.num-buttons .wapper{
+  display: flex;
+  position: absolute;
+  right: 20rpx;
+  bottom: 20rpx;
+}
+
+.num-container  view .sub-button{
+  padding: 5rpx 20rpx;
+  background-color: #f0f1f4;
+  margin-right: 10rpx;
+  border-top-left-radius: 10rpx;
+  border-bottom-left-radius: 10rpx;
+
+}
+
+.num-container  view .num-text{
+  padding: 5rpx 20rpx;
+  background-color: #f0f1f4;
+  margin-right: 10rpx;
+}
+
+.num-container  view .add-button{
+  padding: 5rpx 20rpx;
+  background-color: #f0f1f4;
+  border-top-right-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+}
+
+
+.bottom-container{
+  position: fixed;
+  bottom: 0rpx;
+}

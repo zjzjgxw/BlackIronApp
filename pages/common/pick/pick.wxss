@@ -1,0 +1,180 @@
+/* pages/common/pick/pick.wxss */
+.pick-container{
+  background-color: #ffffff;
+  width: 100%;
+  position: fixed;
+  bottom: 0rpx;
+  border-top-left-radius: 40rpx;
+  border-top-right-radius: 40rpx;
+}
+
+.pick-container .pick-swapper{
+  padding-right: 20rpx;
+  padding-left: 20rpx;
+  padding-top: 40rpx;
+}
+
+.info-container{
+  display: flex;
+  margin-bottom: 10rpx;
+}
+
+.info-container .image-show{
+  width: 160rpx;
+  height: 160rpx;
+}
+.info-container .image-show image{
+  width: 100%;
+  height: 100%;
+}
+
+.info-container .price-show{
+  width: 300rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-container .price-show view{
+  display: flex;
+  align-items: baseline;
+}
+
+.info-container .price-show view .price-p{
+  font-size: 34rpx;
+  color: #fb504b;
+}
+
+.info-container .price-show view .last-num{
+  font-size: 24rpx;
+  opacity: 0.8;
+  margin-left: 20rpx;
+}
+
+.info-container .price-show view p{
+  font-size: 24rpx;
+  opacity: 0.8;
+  margin-left: 20rpx;
+}
+
+.divLine {
+  background: #000000;
+  opacity: 0.1;
+  width: 100%;
+  height: 2rpx;
+}
+
+.specification-container{
+  margin-top: 20rpx;
+}
+
+.specification-container .title{
+  margin-top: 20rpx;
+  font-size: 30rpx;
+  opacity: 0.8;
+}
+
+
+.specification-container .options{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10rpx;
+}
+
+.specification-container .options view{
+  margin-right: 30rpx;
+  margin-top: 20rpx;
+  background-color: #f6f7f9;
+  padding: 10rpx 30rpx;
+  font-size: 28rpx;
+  opacity: 0.8;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+}
+
+.specification-container .options image{
+  width: 50rpx;
+  height: 50rpx;
+  position: relative;
+  right: 20rpx;
+  border-radius: 10rpx;
+}
+
+.num-container{
+  display: flex;
+  margin-bottom: 100rpx;
+
+}
+
+.num-container .title{
+  margin-top: 20rpx;
+  font-size: 30rpx;
+  opacity: 0.8;
+}
+
+
+.num-buttons{
+  display: flex;
+}
+
+.num-buttons .wapper{
+  display: flex;
+  position: absolute;
+  right: 20rpx;
+  margin-top: 20rpx;
+}
+
+.num-container  view .sub-button{
+  padding: 10rpx 20rpx;
+  background-color: #f0f1f4;
+  margin-right: 10rpx;
+  border-top-left-radius: 10rpx;
+  border-bottom-left-radius: 10rpx;
+
+}
+
+.num-container  view .num-text{
+  padding: 10rpx 30rpx;
+  background-color: #f0f1f4;
+  margin-right: 10rpx;
+}
+
+.num-container  view .add-button{
+  padding: 10rpx 20rpx;
+  background-color: #f0f1f4;
+  border-top-right-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+}
+
+.bottom-container{
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  padding-bottom: 10rpx;
+}
+
+.bottom-container .bottom-button{
+  width: 100%;
+  border-radius:  40rpx;
+  border-width: 0rpx;
+  background-color: #fb504b;
+  color: #ffffff;
+  font-size: 30rpx;
+}
+
+
+.closs-button {
+  opacity: 0.3;
+  border-radius: 24rpx;
+  line-height: 40rpx;
+  text-align: center;
+  height: 40rpx;
+  width: 40rpx;
+  font-size: 40rpx;
+  padding: 2rpx;
+  position: absolute;
+  top:20rpx;
+  right: 20rpx;
+}
+.closs-button::before {
+  content: “\2716”;
+}

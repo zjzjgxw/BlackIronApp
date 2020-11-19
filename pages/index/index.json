@@ -1,6 +1,7 @@
 {
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "product-list": "../common/product/productList"
+    "product-list": "../common/product/productList",
+    "pick-product":"../common/pick/pick"
   }
 }
