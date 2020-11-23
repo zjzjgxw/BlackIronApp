@@ -1,0 +1,28 @@
+<!--pages/coupons/index.wxml-->
+
+<view>
+  <view class="tap_container">
+    <view class="option" wx:for="{{tabs}}" wx:for-index="index" wx:for-item="item" data-item="{{item}}"
+      bindtap="selectTap">
+      {{item.title}}
+      <view class="divLine {{item.visable}}"></view>
+    </view>
+  </view>
+
+  <view class="{{tabs[0].visable}}">
+    <block wx:for="{{useCoupons}}" wx:for-index="index" wx:for-item="item">
+      <coupon-item coupon="{{item}}" bindtap="selectCoupon" data-item="{{item}}">
+      </coupon-item>
+    </block>
+  </view>
+
+
+
+  <view class="{{tabs[1].visable}}">
+    <block wx:for="{{coupons}}" wx:for-index="index" wx:for-item="item">
+      <coupon-item coupon="{{item}}" bindtap="selectCoupon" data-item="{{item}}">
+      </coupon-item>
+    </block>
+  </view>
+
+</view>

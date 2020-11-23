@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "coupon-item":"../common/coupon/index"
+  }
+}

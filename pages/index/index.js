@@ -27,12 +27,6 @@ Page({
     })
   },
 
-  swipclick: function(value){
-    wx.navigateTo({
-      url: '/pages/article/create'
-    })
-  },
-
   //事件处理函数
   bindViewTap: function () {
     wx.navigateTo({

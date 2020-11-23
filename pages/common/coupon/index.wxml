@@ -1,0 +1,19 @@
+<!--pages/common/coupon/index.wxml-->
+<view class="coupon-container">
+  <view class="price">
+    ￥{{coupon.price}}
+  </view>
+  <view class="desc">
+    <view class="target-price">
+      满{{coupon.targetPrice}}可用
+    </view>
+    <view class="end-time">
+      有效期至{{coupon.endTime}}
+    </view>
+  </view>
+
+  <view class="status">
+    {{coupon.status.text}}
+  </view>
+
+</view>

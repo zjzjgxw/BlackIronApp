@@ -5,7 +5,9 @@
     "pages/user/index",
     "pages/article/create",
     "pages/product/detail",
-    "pages/cart/index"
+    "pages/cart/index",
+    "pages/order/index",
+    "pages/coupons/index"
   ],
   "tabBar": {
     "color": "#cdcdcd",
@@ -16,7 +18,8 @@
         "iconPath": "images/index/unselect_home.png",
         "pagePath": "pages/index/index",
         "text": "首页"
-      },{
+      },
+      {
         "selectedIconPath": "images/index/cart_black.png",
         "iconPath": "images/index/unselect_cart.png",
         "pagePath": "pages/cart/index",

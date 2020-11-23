@@ -7,7 +7,7 @@ page {
 
 .slidecells{
   width: 100%;
-  margin-top: 40rpx;
+  margin-top: 20rpx;
 }
 
 .prodcut-container{
@@ -105,4 +105,66 @@ page {
 .bottom-container{
   position: fixed;
   bottom: 0rpx;
+  display:flex;
+  background-color: #ffffff;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  width: 100%;
 }
+
+
+.bottom-container .total-radio p{
+  font-size: 30rpx;
+  font-weight: 300;
+}
+
+.bottom-container .button-swapper {
+  display: flex;
+  position: absolute;
+  right: 10rpx;
+}
+
+.bottom-container .button-swapper .total-price{
+  display: flex;
+  flex-direction: column;
+  margin-right: 20rpx;
+  align-items: flex-end;
+}
+
+.bottom-container .button-swapper .total-price .number{
+  font-size: 28rpx;
+  color: #fb504b;
+}
+.bottom-container .button-swapper .total-price .number p{
+  color: #000;
+  font-size: 28rpx;
+  opacity: 0.8;
+  font-weight: 300;
+
+}
+
+.bottom-container .button-swapper .total-price .express-info{
+  font-size: 24rpx;
+  opacity: 0.5;
+  font-weight: 300;
+}
+
+
+
+.bottom-container .button-swapper view button{
+  width: 200rpx;
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: 300;
+  background-color: #fb504b;
+  border-radius: 50rpx;
+  border-width: 0rpx;
+}
+
+.bottom-container .total-radio{
+  display: flex;
+  align-items: center;
+  margin: 10rpx 20rpx;
+}
+
+

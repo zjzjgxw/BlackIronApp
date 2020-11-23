@@ -14,7 +14,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("onload")
+    let app = getApp();
+    if(app.globalData.userInfo != null){
+      this.setData({
+        userInfo:app.globalData.userInfo
+      })
+    }
     // // 获取用户信息
     // wx.getSetting({
     //   success: res => {
@@ -53,7 +58,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   handleLogin: function () {

@@ -3,10 +3,10 @@
 <view>
 
   <view class="slidecells" wx:for="{{cart}}" wx:for-index="index" wx:for-item="item">
-    <mp-slideview buttons="{{slideButtons}}" icon="{{true}}"  data-item="{{item}}"   bindbuttontap="deleteItem">
+    <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" data-item="{{item}}" bindbuttontap="deleteItem">
       <view class="prodcut-container">
         <view class="radio-swapper">
-          <radio color="#fb504b"  data-item="{{item}}" checked="{{item.isSelected}}"  bindtap="handleRadioChange" />
+          <radio color="#fb504b" data-item="{{item}}" checked="{{item.isSelected}}" bindtap="handleRadioChange" />
         </view>
         <view class="item-swapper">
           <view>
@@ -27,7 +27,7 @@
               </view>
               <view class="num-buttons">
                 <view class="wapper">
-                  <view class="sub-button" data-item="{{item}}"  bindtap="handleSub">
+                  <view class="sub-button" data-item="{{item}}" bindtap="handleSub">
                     <p>-</p>
                   </view>
                   <view class="num-text">
@@ -45,9 +45,29 @@
     </mp-slideview>
   </view>
 
+  <view style="padding:20rpx 20rpx; margin-bottom:100rpx;">
+    <product-list type="recommend" title="推荐">
+    </product-list>
+  </view>
+
 
   <view class="bottom-container">
-    ￥{{totalPrice}}
+    <view class="total-radio">
+      <radio color="#fb504b" checked="{{totalSelected}}" bindtap="handleTotalSelected" />
+      <p>全选</p>
+    </view>
+    <view class="button-swapper">
+      <view class="total-price">
+        <p class="number">
+        <p>合计:</p>￥{{totalPrice}}</p>
+        <p class="express-info">不含邮费</p>
+      </view>
+      <view>
+        <button plain="true" bindtap="handleOrder" > 结算</button>
+      </view>
+    </view>
+
   </view>
+
 
 </view>

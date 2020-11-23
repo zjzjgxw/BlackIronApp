@@ -73,8 +73,10 @@ module.exports = {
       "code": code
     })
   },
-  getBanners(){
-    return requestData(WEB_DOMAIN + "/app/banners",{businessId:BUSINESS_ID})
+  getBanners() {
+    return requestData(WEB_DOMAIN + "/app/banners", {
+      businessId: BUSINESS_ID
+    })
   },
   updateUserInfo(data) {
     return requestData(WEB_DOMAIN + "/users/wx", data, "put")
@@ -89,18 +91,35 @@ module.exports = {
     return requestData(WEB_DOMAIN + "/articles", data, "post")
   },
   getRecommendProducts() {
-    return requestData(WEB_DOMAIN + "/app/products/recommend",{businessId:BUSINESS_ID})
+    return requestData(WEB_DOMAIN + "/app/products/recommend", {
+      businessId: BUSINESS_ID
+    })
   },
-  getAllCategory(){
-    return requestData(WEB_DOMAIN + "/app/products/category",{businessId:BUSINESS_ID})
+  getAllCategory() {
+    return requestData(WEB_DOMAIN + "/app/products/category", {
+      businessId: BUSINESS_ID
+    })
   },
-  getProductsOfCategory(categoryId,pageNum=1,pageSize=10){
-    return requestData(WEB_DOMAIN + "/app/products",{businessId:BUSINESS_ID,categoryId,pageNum,pageSize})
+  getProductsOfCategory(categoryId, pageNum = 1, pageSize = 10) {
+    return requestData(WEB_DOMAIN + "/app/products", {
+      businessId: BUSINESS_ID,
+      categoryId,
+      pageNum,
+      pageSize
+    })
   },
-  getProductInfo(id){
-    return requestData(WEB_DOMAIN + "/app/products/detail/"+id)
+  getProductInfo(id) {
+    return requestData(WEB_DOMAIN + "/app/products/detail/" + id)
   },
-  getStockOfProdcut(productId){
-    return requestData(WEB_DOMAIN + "/app/products/stock",{productId:productId})
+  getStockOfProdcut(productId) {
+    return requestData(WEB_DOMAIN + "/app/products/stock", {
+      productId: productId
+    })
+  },
+  getCoupons(productIds) {
+    return requestData(WEB_DOMAIN + "/app/coupons?productIds=" + productIds.join(","))
+  },
+  createOrder(params) {
+    return requestData(WEB_DOMAIN + "/app/orders",params,"POST")
   }
 }

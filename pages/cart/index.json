@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "mp-slideview": "weui-miniprogram/slideview/slideview"
+    "mp-slideview": "weui-miniprogram/slideview/slideview",
+    "product-list": "../common/product/productList"
   }
 }

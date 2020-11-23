@@ -68,7 +68,7 @@
 
    <view class="bottom-container">
       <button wx:if="{{type == 'cart'}}"  class="bottom-button" plain="true" bindtap="addCart" >加入购物车</button>
-      <button wx:if="{{type == 'buy'}}"  class="bottom-button" plain="true">下一步</button>
+      <button wx:if="{{type == 'buy'}}"  class="bottom-button" plain="true" bindtap="submitOrder" >下一步</button>
    </view>
   
    <view class="closs-button" bindtap="handleClose">×

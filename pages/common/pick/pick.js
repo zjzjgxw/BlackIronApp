@@ -7,11 +7,11 @@ Component({
    */
   properties: {
     hidden: Boolean,
-    productId: Number,
     type: String,
     imgUrl: String,
     type: String,
     productInfo: Object,
+    productId: Number
   },
 
 
@@ -46,9 +46,9 @@ Component({
     unSelectedColor: '#f6f7f9',
   },
 
-  lifetimes: {
-    attached: function () {
-      api.getStockOfProdcut(13).then(result => {
+  pageLifetimes: {
+    show: function () {
+      api.getStockOfProdcut(this.properties.productId).then(result => {
         if (api.isSuccess(result)) {
           let info = result.data.info;
           if (info.specifications.length == 0) { //没有规格
@@ -76,14 +76,16 @@ Component({
               if (item.secondName == null) {
                 stockDict[item.firstValue] = {
                   price: item.detail.price,
-                  lastNum: item.detail.lastNum
+                  lastNum: item.detail.lastNum,
+                  specificationId: item.id
                 }
               } else {
                 secondOptions.add(item.secondValue)
                 secondOptionsColor[item.secondValue] = this.data.unSelectedColor;
                 stockDict[item.firstValue + "_" + item.secondValue] = {
                   price: item.detail.price,
-                  lastNum: item.detail.lastNum
+                  lastNum: item.detail.lastNum,
+                  specificationId: item.id
                 }
               }
             });
@@ -102,30 +104,30 @@ Component({
           }
         }
       })
-      
-    },
-    detached: function () {
-      // 在组件实例被从页面节点树移除时执行
+
     },
   },
+
+  lifetimes: {},
   /**
    * 组件的方法列表
    */
   methods: {
-    addCart:function(){
-      if(this.data.firstName != null && this.data.chosedFirst == null){
+
+    handleProductInfo: function () {
+      if (this.data.firstName != null && this.data.chosedFirst == null) {
         wx.showToast({
-          title: '请选择'+this.data.firstName,
+          title: '请选择' + this.data.firstName,
           icon: 'none'
         });
-        return;
+        return false;
       }
-      if(this.data.secondName != null && this.data.chosedSecond == null){
+      if (this.data.secondName != null && this.data.chosedSecond == null) {
         wx.showToast({
-          title: '请选择'+this.data.secondName,
+          title: '请选择' + this.data.secondName,
           icon: 'none'
         });
-        return;
+        return false;
       }
       this.properties.productInfo['price'] = this.data.price;
       this.properties.productInfo['num'] = this.data.num;
@@ -133,47 +135,89 @@ Component({
       this.properties.productInfo['secondName'] = this.data.secondName;
       this.properties.productInfo['firstValue'] = this.data.chosedFirst;
       this.properties.productInfo['secondValue'] = this.data.chosedSecond;
+      if (this.data.firstName == null) {
+        this.properties.productInfo['specificationId'] = null;
+      } else {
+        if (this.data.secondName == null) {
+          this.properties.productInfo['specificationId'] = this.data.stockDict[this.data.chosedFirst].specificationId
+        } else {
+          this.properties.productInfo['specificationId'] = this.data.stockDict[this.data.chosedFirst + "_" + this.data.chosedSecond].specificationId
+        }
+      }
+
+      return true;
+    },
+
+    addCart: function () {
+      if (!this.handleProductInfo()) {
+        return;
+      }
 
       let cart = wx.getStorageSync('cart') || [];
       let isExist = false;
-      cart.forEach(item=>{
-        if(item.id == this.properties.productInfo.id && item.firstName == this.properties.productInfo.firstName && item.firstValue == this.properties.productInfo.firstValue
-          && item.secondName == this.properties.productInfo.secondName && item.secondValue == this.properties.productInfo.secondValue){
-            item.num += this.properties.productInfo.num;
-            isExist = true;
+      cart.forEach(item => {
+        if (item.id == this.properties.productInfo.id && item.firstName == this.properties.productInfo.firstName && item.firstValue == this.properties.productInfo.firstValue &&
+          item.secondName == this.properties.productInfo.secondName && item.secondValue == this.properties.productInfo.secondValue) {
+          item.num += this.properties.productInfo.num;
+          isExist = true;
         }
       });
-      if(!isExist){
+      if (!isExist) {
         cart.push(this.properties.productInfo);
       }
       wx.setStorageSync('cart', cart);
       this.setData({
-        isHidden:true
-      })
+          isHidden: true
+        }),
+        this.triggerEvent("onAddCartEvent");
     },
 
-    handleClose:function(){
-      this.setData({
-        isHidden:true
+    submitOrder: function () {
+      if (!this.handleProductInfo()) {
+        return;
+      }
+      wx.setStorageSync('coupon', null);
+      wx.setStorageSync('order', {
+        products: [this.properties.productInfo]
+      });
+      wx.navigateTo({
+        url: '/pages/order/index',
       })
     },
-    handleSub:function(){
-      if(this.data.num >1){
+    handleClose: function () {
+      this.setData({
+        isHidden: true
+      })
+    },
+    handleSub: function () {
+      if (this.data.num > 1) {
         this.setData({
-          num:this.data.num -1
+          num: this.data.num - 1
         })
       }
     },
-    handleAdd:function(){
-        this.setData({
-          num:this.data.num +1
-        })
+    handleAdd: function () {
+      this.setData({
+        num: this.data.num + 1
+      })
     },
     handleFirstSelected: function (e) {
 
       if (this.data.secondName == null) {
         let info = this.data.stockDict[e.currentTarget.dataset.item];
+        //设置被选择的颜色
+        let colors = this.data.firstOptionsColor;
+        for (let key in colors) {
+          if (key == e.currentTarget.dataset.item) {
+            colors[key] = this.data.selectedColor;
+          } else {
+            colors[key] = this.data.unSelectedColor;
+          }
+        }
+
         this.setData({
+          chosedFirst: e.currentTarget.dataset.item,
+          firstOptionsColor: colors,
           price: info.price,
           lastNum: info.lastNum,
         })
@@ -182,7 +226,7 @@ Component({
           let key = e.currentTarget.dataset.item + '_' + this.data.chosedSecond;
           if (this.data.stockDict.hasOwnProperty(key)) {
             let info = this.data.stockDict[key];
-            if(info.lastNum < this.data.num){
+            if (info.lastNum < this.data.num) {
               wx.showToast({
                 title: '剩余库存少于' + this.data.num,
                 icon: 'none'
@@ -194,38 +238,38 @@ Component({
               lastNum: info.lastNum,
             })
             //设置被选择的颜色
-              let colors = this.data.firstOptionsColor;
-              for (let key in colors) {
-                if (key == e.currentTarget.dataset.item) {
-                  colors[key] = this.data.selectedColor;
-                } else {
-                  colors[key] = this.data.unSelectedColor;
-                }
+            let colors = this.data.firstOptionsColor;
+            for (let key in colors) {
+              if (key == e.currentTarget.dataset.item) {
+                colors[key] = this.data.selectedColor;
+              } else {
+                colors[key] = this.data.unSelectedColor;
               }
-              this.setData({
-                chosedFirst: e.currentTarget.dataset.item,
-                firstOptionsColor: colors
-              })
+            }
+            this.setData({
+              chosedFirst: e.currentTarget.dataset.item,
+              firstOptionsColor: colors
+            })
           } else {
             wx.showToast({
               title: '已售完',
               icon: 'none'
             })
           }
-        }else{
-           //设置被选择的颜色
-           let colors = this.data.firstOptionsColor;
-           for (let key in colors) {
-             if (key == e.currentTarget.dataset.item) {
-               colors[key] = this.data.selectedColor;
-             } else {
-               colors[key] = this.data.unSelectedColor;
-             }
-           }
-           this.setData({
-             chosedFirst: e.currentTarget.dataset.item,
-             firstOptionsColor: colors
-           })
+        } else {
+          //设置被选择的颜色
+          let colors = this.data.firstOptionsColor;
+          for (let key in colors) {
+            if (key == e.currentTarget.dataset.item) {
+              colors[key] = this.data.selectedColor;
+            } else {
+              colors[key] = this.data.unSelectedColor;
+            }
+          }
+          this.setData({
+            chosedFirst: e.currentTarget.dataset.item,
+            firstOptionsColor: colors
+          })
         }
       }
     },
@@ -234,9 +278,9 @@ Component({
         let key = this.data.chosedFirst + '_' + e.currentTarget.dataset.item;
         if (this.data.stockDict.hasOwnProperty(key)) {
           let info = this.data.stockDict[key];
-          if(info.lastNum < this.data.num){ //剩余库存不足
+          if (info.lastNum < this.data.num) { //剩余库存不足
             wx.showToast({
-              title: '剩余库存少于'+this.data.num,
+              title: '剩余库存少于' + this.data.num,
               icon: 'none'
             })
             return;

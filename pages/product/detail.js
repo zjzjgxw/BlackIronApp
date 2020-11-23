@@ -16,13 +16,17 @@ Page({
     circular: true,
     hidePicker: true,
     pickerType: 'buy',
-    cartNum:0
+    cartNum: 0,
+    productId:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      productId:options.id
+    })
     api.getProductInfo(options.id).then(result => {
       if (api.isSuccess(result)) {
         this.setData({
@@ -32,9 +36,9 @@ Page({
     })
 
     let cart = wx.getStorageSync('cart') || [];
-      this.setData({
-        cartNum:cart.length
-      })
+    this.setData({
+      cartNum: cart.length
+    })
   },
 
   swiperChange: function (e) {
@@ -43,20 +47,52 @@ Page({
     })
   },
 
-  handleBuy: function(e){
+  handleBuy: function (e) {
     this.setData({
-      hidePicker:false,
-      pickerType:'buy'
+      hidePicker: false,
+      pickerType: 'buy'
     })
   },
 
-  handleAddCart:function(){
+  handleAddCart: function () {
     this.setData({
-      hidePicker:false,
-      pickerType:'cart'
+      hidePicker: false,
+      pickerType: 'cart'
     })
   },
 
+  onAddCartEvent: function (e) {
+    let cart = wx.getStorageSync('cart') || [];
+    this.setData({
+      cartNum: cart.length
+    })
+  },
+  goCart:function(){
+    if(!util.checkLogin()){
+      util.doLogin().then((res)=>{
+        wx.switchTab({
+          url: '/pages/cart/index',
+        })
+      })
+    }else{
+      wx.switchTab({
+        url: '/pages/cart/index',
+      })
+    }
+  },
+  goHome:function(){
+    if(!util.checkLogin()){
+      util.doLogin().then((res)=>{
+        wx.switchTab({
+          url: '/pages/index/index',
+        })
+      })
+    }else{
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
+    }
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -69,7 +105,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+ 
   },
 
   /**

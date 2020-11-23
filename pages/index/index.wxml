@@ -9,7 +9,6 @@
   </swiper>
 </view>
 
-
 <view style="padding:20rpx 20rpx;" wx:for="{{categories}}" wx:for-index="index"  wx:for-item="item"  wx:key="{{item.id}}"> 
   <product-list type="list" categoryId="{{item.id}}" title="{{item.name}}" />
 </view>

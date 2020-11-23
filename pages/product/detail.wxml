@@ -16,10 +16,10 @@
       <p>￥{{detail.price}}</p>
     </view>
     <view class="title">
-      <p> {{detail.name}}的局第三方蝴蝶是符合的经适房电视剧疯狂的很舒服加快速度发</p>
+      <p> {{detail.name}}</p>
     </view>
     <view class="description">
-      <p>{{detail.description}}第三方士大夫骄傲的司法局的康师傅骄傲的思考了发掘刷饭卡的酸辣粉SD卡附近的说法会计法独守空房</p>
+      <p>{{detail.description}}</p>
     </view>
   </view>
 
@@ -63,11 +63,11 @@
 
   <view class="bottom-block"></view>
   <view class="bottom-container">
-    <view class="store">
+    <view class="store" bindtap="goHome">
       <image src="../../images/index/store.png" class="img" />
       <p>店铺</p>
     </view>
-    <view class="cart">
+    <view class="cart" bindtap="goCart">
       <image src="../../images/index/cart_black.png" class="img" />
       <p>购物车</p>
       <view class="red-pot" wx:if="{{cartNum != 0}}">{{cartNum}}</view>
@@ -78,6 +78,6 @@
     </view>
   </view>
 
-  <pick-product class="product-picker " hidden="{{hidePicker}}" type="{{pickerType}}" productInfo="{{detail}}"
-    imgUrl="{{detail.coverUrl}}"></pick-product>
+  <pick-product class="product-picker " hidden="{{hidePicker}}" type="{{pickerType}}" productInfo="{{detail}}" productId="{{productId}}"
+    imgUrl="{{detail.coverUrl}}"  bind:onAddCartEvent="onAddCartEvent"></pick-product>
 </view>

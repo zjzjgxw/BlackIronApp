@@ -87,8 +87,10 @@
 		</view>
 
 
-		<product-list>
-		</product-list>
+		<view style="padding:20rpx 20rpx;">
+			<product-list type="recommend" title="推荐">
+			</product-list>
+		</view>
 
 	</view>
 

@@ -1,0 +1,128 @@
+<!--pages/order/index.wxml-->
+<view>
+
+  <view class="address-container">
+    <view class="address-selector" bindtap="selectAddress">
+      <view class="left-swapper">
+        <view wx:if="{{area}}" class="country">
+          {{area}}
+        </view>
+        <view wx:if="{{address}}"  class="detail">
+          {{address}}
+        </view>
+        <view wx:if="{{!address}}"  class="detail">
+          请填写地址
+        </view>
+        <view wx:if="{{receiver}}"  class="receiver">
+          <p>{{receiver}}</p>
+          <p>{{telphone}}</p>
+        </view>
+      </view>
+      <view wx:if="{{mode == 'create' }}"  class="right-swapper">
+        <view class="icon-v-right .right-position"  />
+      </view>
+
+    </view>
+    <!-- 分割线 -->
+      <view class="divLine"></view>
+      
+    <view class="express-info">
+      <view class="desc">
+        配送方式
+      </view>
+      <view class="fee">
+        <p>快递</p>
+        <p>免运费</p>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="prodcut-container">
+    <view class="store-name">
+      <image src="../../images/index/store.png" mode="cover"></image>
+
+      <p>{{storeName}}</p>
+    </view>
+
+    <view class="product-list">
+      <view class="product-item" wx:for="{{order.products}}" wx:for-index="index" wx:for-item="item">
+        <view class="product-image">
+          <image src="{{item.coverUrl}}" mode="cover"></image>
+        </view>
+        <view class="info-swapper">
+          <view class="title">
+            {{item.name}}
+          </view>
+          <view class="specification">
+            <p wx:if="{{item.firstValue}}">{{item.firstValue}}</p>
+            <p wx:if="{{item.secondValue}}">{{item.secondValue}}</p>
+          </view>
+          <view class="price-swapper">
+            <view class="price">￥{{item.price}}</view>
+            <view class="num" >×{{item.num}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="total-container">
+      <view class="total-price">
+        商品小计: <p>￥{{totalPrice}}</p>
+      </view>
+      <view class="total-number">
+        共{{totalNum}}件
+      </view>
+
+    </view>
+
+  </view>
+
+
+  <view class="coupon-container" bindtap="goCoupons">
+    <view class="desc">
+      优惠券
+    </view>
+    <view class="coupon-rigth-position">
+      <view class="desc">
+        <view  wx:if="{{coupon == null && mode == 'create'}}">
+          <p wx:if="{{useCouponsNum == 0}}">暂无可用</p> 
+          <p wx:if="{{useCouponsNum != 0}}">有{{useCouponsNum}}张券可用</p> 
+        </view>
+        <view wx:if="{{coupon != null}}">
+          <p>抵扣￥{{coupon.price}}</p> 
+        </view>
+      </view>
+      <view  wx:if="{{mode == 'create' }}"  class="icon-v-right"  />
+    </view>
+  </view>
+
+  <view class="remark-container">
+    <view class="desc"> 
+      买家留言
+    </view>
+
+    <view  wx:if="{{mode == 'create' }}"  class="input-swapper">
+      <input disabled="{{isDisabled}}" placeholder="留言建议提前联系客服（50字以内）" placeholder-class="placeholder"  style="text-align:right" />
+    </view>
+   
+  </view>
+
+
+  <view class="bottom-container">
+    <view class="button-swapper">
+      <view class="total-price">
+        <p class="number">
+        <p>合计:</p>￥{{totalPrice}}</p>
+        <p class="express-info">含邮费:￥{{expressPrice}}</p>
+      </view>
+    </view>
+    <view wx:if="{{mode == 'create'}}" >
+        <button plain="true" bindtap="submitOrder" > 提交订单</button>
+    </view>
+    <view wx:if="{{mode == 'pay'}}" >
+        <button plain="true" bindtap="payOrder"  > 去支付</button>
+    </view>
+  </view>
+
+</view>

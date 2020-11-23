@@ -8,6 +8,7 @@ Page({
     cart:[],
     slideButtons:[],
     totalPrice:0,
+    totalSelected:true,
   },
 
   /**
@@ -38,9 +39,15 @@ Page({
         item.isSelected = !item.isSelected;
       }
     })
-
+    let totalSelected = true;
+    cart.forEach(item=>{
+      if(item.isSelected == false){
+        totalSelected = false;
+      }
+    })
     this.setData({
       cart:cart,
+      totalSelected:totalSelected,
       totalPrice:this.getTotalPrice(cart)
     })
   },
@@ -95,6 +102,44 @@ Page({
     this.setData({
       cart:cart,
       totalPrice:this.getTotalPrice(cart)
+    });
+    wx.setStorageSync('cart', cart)
+  },
+
+  handleTotalSelected:function(){
+    if(this.data.totalSelected == true){
+      let cart = this.data.cart;
+      cart.forEach(item=>{
+        item.isSelected = false;
+      });
+      this.setData({
+        cart,
+        totalSelected: false,
+        totalPrice:this.getTotalPrice(cart)
+      });
+    }else{
+      let cart = this.data.cart;
+      cart.forEach(item=>{
+        item.isSelected = true;
+      });
+      this.setData({
+        cart,
+        totalSelected: true,
+        totalPrice:this.getTotalPrice(cart)
+      });
+    }
+  },
+
+  handleOrder:function(){
+    let products = [];
+    this.data.cart.forEach(item=>{
+      if(item.isSelected){
+        products.push(item);
+      }
+    })
+    wx.setStorageSync('order', {products:products});
+    wx.navigateTo({
+      url: '/pages/order/index',
     })
   },
 

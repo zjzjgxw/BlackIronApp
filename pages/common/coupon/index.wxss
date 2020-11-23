@@ -1,0 +1,48 @@
+/* pages/common/coupon/index.wxss */
+page {
+  background-color: #f8f8f8;
+  --font-color: #fb504b;
+}
+
+
+.coupon-container{
+  margin-right: 20rpx;
+  margin-left: 20rpx;
+  background-color: #fff3ee;
+  display: flex;
+  margin-top: 20rpx;
+  border-radius: 10rpx;
+  padding: 40rpx 40rpx;
+}
+
+.coupon-container .price{
+  color: var(--font-color);
+  font-size: 50rpx;
+  display: flex;
+  align-items: center;
+  margin-right: 20rpx;
+}
+
+.coupon-container .desc{
+  display: flex;
+  flex-direction: column;
+}
+
+.coupon-container .desc .target-price{
+  color: var(--font-color);
+  font-size:38rpx;
+}
+
+
+.coupon-container .desc .end-time{
+  color: var(--font-color);
+  font-size:28rpx;
+}
+
+.coupon-container .status{
+  color: var(--font-color);
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  margin-left: 20rpx;
+}
