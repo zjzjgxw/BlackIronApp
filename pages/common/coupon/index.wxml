@@ -1,11 +1,14 @@
 <!--pages/common/coupon/index.wxml-->
+<wxs src="../../../utils/tools.wxs" module="tools" />
+
+
 <view class="coupon-container">
   <view class="price">
-    ￥{{coupon.price}}
+    ￥{{tools.formatMoney(coupon.price,0) }}
   </view>
   <view class="desc">
     <view class="target-price">
-      满{{coupon.targetPrice}}可用
+      满{{ tools.formatMoney(coupon.targetPrice,0) }}可用
     </view>
     <view class="end-time">
       有效期至{{coupon.endTime}}

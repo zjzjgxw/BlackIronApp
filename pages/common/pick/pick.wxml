@@ -1,4 +1,7 @@
 <!--pages/common/pick/pick.wxml-->
+<wxs src="../../../utils/tools.wxs" module="tools" />
+
+
 <view class="pick-container" hidden="{{isHidden}}">
   <view class="pick-swapper">
     <view class="info-container">
@@ -7,7 +10,7 @@
       </view>
       <view class="price-show">
         <view>
-          <p class="price-p" wx:if="{{price}}">￥{{price}}</p>
+          <p class="price-p" wx:if="{{price}}">￥{{ tools.formatMoney(price)}}</p>
           <p class="last-num" wx:if="{{lastNum}}"> 剩余{{lastNum}}</p>
         </view>
         <view wx:if="{{hasSpecifications}}">

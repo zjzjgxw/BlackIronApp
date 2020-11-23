@@ -18,6 +18,8 @@ Page({
     useCouponsNum: 0,
     coupon: null,
     mode:"create",
+    productIds:[],
+    discountPirce:0
   },
 
   /**
@@ -46,7 +48,8 @@ Page({
       storeName,
       totalNum,
       totalPrice,
-      expressPrice
+      expressPrice,
+      productIds
     });
 
     //获取可用的优惠券数量
@@ -123,13 +126,10 @@ Page({
    */
   onShow: function () {
     let coupon = wx.getStorageSync('coupon');
-
     if (coupon != null) {
-      let totalPrice = this.data.totalPrice;
-      totalPrice -= coupon.price;
       this.setData({
         coupon,
-        totalPrice
+        discountPirce:coupon.price
       });
     }
   },
@@ -152,8 +152,9 @@ Page({
   },
   goCoupons: function () {
     if(this.data.mode == "create"){
+      let idString = this.data.productIds.join(",")
       wx.navigateTo({
-        url: `/pages/coupons/index`
+        url: `/pages/coupons/index?productId=${idString}`
       });
     }
    

@@ -1,0 +1,13 @@
+
+
+var tools = {
+  formatMoney: function (value, fixed = 2) {
+    return (value/100).toFixed(fixed);
+  }
+}
+
+
+
+module.exports = {
+  formatMoney:tools.formatMoney
+}

@@ -1,5 +1,8 @@
 <!--pages/common/product/productList.wxml-->
 <!-- <scroll-view bindscrolltolower="getMoreData" scroll-y lower-threshold="80"> -->
+
+<wxs src="../../../utils/tools.wxs" module="tools" />
+
 <scroll-view>
   <view>
        <view class="title">
@@ -20,7 +23,7 @@
         </view>
         <view class="card-price">
           <view>
-            <p>${{item.price}}</p>
+            <p>￥{{tools.formatMoney(item.price)}}</p>
           </view>
           <view>
             <image class="userinfo-avatar" src="../../../images/index/cart.png" mode="cover"></image>

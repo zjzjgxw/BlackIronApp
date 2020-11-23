@@ -1,4 +1,6 @@
 <!--pages/product/detail.wxml-->
+<wxs src="../../utils/tools.wxs" module="tools" />
+
 <view>
 
   <view class="swiper-container">
@@ -13,7 +15,7 @@
   </view>
   <view class="title-container">
     <view class="price">
-      <p>￥{{detail.price}}</p>
+      <p>￥{{tools.formatMoney(detail.price)}}</p>
     </view>
     <view class="title">
       <p> {{detail.name}}</p>

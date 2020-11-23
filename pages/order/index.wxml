@@ -1,4 +1,6 @@
 <!--pages/order/index.wxml-->
+<wxs src="../../utils/tools.wxs" module="tools" />
+
 <view>
 
   <view class="address-container">
@@ -59,7 +61,7 @@
             <p wx:if="{{item.secondValue}}">{{item.secondValue}}</p>
           </view>
           <view class="price-swapper">
-            <view class="price">￥{{item.price}}</view>
+            <view class="price">￥{{tools.formatMoney(item.price) }}</view>
             <view class="num" >×{{item.num}}</view>
           </view>
         </view>
@@ -68,7 +70,7 @@
 
     <view class="total-container">
       <view class="total-price">
-        商品小计: <p>￥{{totalPrice}}</p>
+        商品小计: <p>￥{{tools.formatMoney(totalPrice)}}</p>
       </view>
       <view class="total-number">
         共{{totalNum}}件
@@ -90,7 +92,7 @@
           <p wx:if="{{useCouponsNum != 0}}">有{{useCouponsNum}}张券可用</p> 
         </view>
         <view wx:if="{{coupon != null}}">
-          <p>抵扣￥{{coupon.price}}</p> 
+          <p>抵扣￥{{tools.formatMoney(coupon.price) }}</p> 
         </view>
       </view>
       <view  wx:if="{{mode == 'create' }}"  class="icon-v-right"  />
@@ -113,8 +115,8 @@
     <view class="button-swapper">
       <view class="total-price">
         <p class="number">
-        <p>合计:</p>￥{{totalPrice}}</p>
-        <p class="express-info">含邮费:￥{{expressPrice}}</p>
+        <p>合计:</p>￥{{tools.formatMoney(totalPrice+expressPrice-discountPirce)}}</p>
+        <p class="express-info">含邮费:￥{{tools.formatMoney(expressPrice)}}</p>
       </view>
     </view>
     <view wx:if="{{mode == 'create'}}" >

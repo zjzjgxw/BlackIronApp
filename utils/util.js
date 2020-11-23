@@ -16,6 +16,10 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const formatMoney = money=>{
+  return money/100;
+}
+
 const checkLogin = function () {
   const app = getApp();
   if (app.globalData.token == null) {
@@ -52,5 +56,6 @@ const doLogin = function () {
 module.exports = {
   formatTime: formatTime,
   checkLogin: checkLogin,
-  doLogin: doLogin
+  doLogin: doLogin,
+  formatMoney:formatMoney
 }

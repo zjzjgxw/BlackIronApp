@@ -50,19 +50,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let productIds = options.productId.split(",");
     if(!util.checkLogin()){
       util.doLogin().then((res)=>{
-        this.getCoupons([16])
+        this.getCoupons(productIds)
       })
     }else{
-      this.getCoupons([16])
+      this.getCoupons(productIds)
     }
   },
 
   selectCoupon: function(e){
     console.log(e);
     let item = e.currentTarget.dataset.item;
-    if(item.status.index == 0){
+    if(item.status.index ==0){
       wx.setStorageSync('coupon', item);
       wx.navigateBack({
         delta: 0,
