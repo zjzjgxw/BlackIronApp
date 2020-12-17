@@ -48,7 +48,7 @@
 				<view class="inner-item">
 					<p class="title"> 我的订单 </p>
 				</view>
-				<view class="inner-item">
+				<view class="inner-item" data-key="0" bindtap="goOrderList">
 					<view style="position:relative; display:flex">
 						<view style="position:absolute;  right:40rpx">
 							<p class="desc"> 查看全部订单 </p>
@@ -61,28 +61,26 @@
 			<view class="divLine"></view>
 
 			<view class="flex-container">
-				<view class="item">
+				<view class="item" data-key="1" bindtap="goOrderList">
 					<image src="../../images/user/waitPay.png" mode="cover"></image>
 					<p> 待付款 </p>
-
 				</view>
-				<view class="item">
+				<view class="item" data-key="2" bindtap="goOrderList">
 					<image src="../../images/user/waitSend.png" mode="cover"></image>
 					<p> 待发货 </p>
-
 				</view>
-				<view class="item">
+				<view class="item" data-key="3" bindtap="goOrderList">
 					<image src="../../images/user/waitConfirm.png" mode="cover"></image>
 					<p> 待收货 </p>
 				</view>
-				<view class="item">
+				<view class="item" data-key="4" bindtap="goOrderList">
 					<image src="../../images/user/waitComment.png" mode="cover"></image>
-					<p> 待评价 </p>
+					<p> 已完成 </p>
 				</view>
-				<view class="item">
+				<!-- <view class="item">
 					<image src="../../images/user/refund.png" mode="cover"></image>
 					<p> 待退款 </p>
-				</view>
+				</view> -->
 			</view>
 		</view>
 

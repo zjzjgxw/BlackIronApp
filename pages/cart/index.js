@@ -139,7 +139,7 @@ Page({
     })
     wx.setStorageSync('order', {products:products});
     wx.navigateTo({
-      url: '/pages/order/index',
+      url: '/pages/order/index?mode=create',
     })
   },
 

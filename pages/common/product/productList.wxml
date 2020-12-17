@@ -24,6 +24,7 @@
         <view class="card-price">
           <view>
             <p>￥{{tools.formatMoney(item.price)}}</p>
+            <p wx:if="{{item.price != item.originalPrice }}"  class= "line-through">{{tools.formatMoney(item.originalPrice)}}</p>
           </view>
           <view>
             <image class="userinfo-avatar" src="../../../images/index/cart.png" mode="cover"></image>

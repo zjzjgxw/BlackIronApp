@@ -30,7 +30,8 @@ Component({
   data: {
     isHidden: true,
     hasSpecifications: false,
-    price: null,
+    price: null, //折扣价
+    originalPrice:null, //原价
     num: 1, //购买数量
     chosedFirst: null, //选择的第一个规格
     chosedSecond: null, //选择的第二个规格
@@ -44,16 +45,20 @@ Component({
     secondOptionsColor: {},
     selectedColor: '#ffebeb',
     unSelectedColor: '#f6f7f9',
+    discount:1,
   },
 
   pageLifetimes: {
     show: function () {
       api.getStockOfProdcut(this.properties.productId).then(result => {
         if (api.isSuccess(result)) {
+          let discount = result.data.discount/100
           let info = result.data.info;
           if (info.specifications.length == 0) { //没有规格
             this.setData({
-              price: info.price,
+              discount: discount,
+              price: info.price * discount,
+              originalPrice: info.price,
               lastNum: info.lastNum,
             })
           } else { //有规格
@@ -75,7 +80,8 @@ Component({
               firstOptionsColor[item.firstValue] = this.data.unSelectedColor;
               if (item.secondName == null) {
                 stockDict[item.firstValue] = {
-                  price: item.detail.price,
+                  price: item.detail.price * discount,
+                  originalPrice: item.detail.price,
                   lastNum: item.detail.lastNum,
                   specificationId: item.id
                 }
@@ -83,14 +89,16 @@ Component({
                 secondOptions.add(item.secondValue)
                 secondOptionsColor[item.secondValue] = this.data.unSelectedColor;
                 stockDict[item.firstValue + "_" + item.secondValue] = {
-                  price: item.detail.price,
+                  price: item.detail.price * discount,
+                  originalPrice: item.detail.price,
                   lastNum: item.detail.lastNum,
                   specificationId: item.id
                 }
               }
             });
             this.setData({
-              price: info.price,
+              price: info.price * discount,
+              originalPrice: info.price,
               lastNum: info.lastNum,
               firstName,
               secondName,
@@ -104,7 +112,6 @@ Component({
           }
         }
       })
-
     },
   },
 
@@ -181,7 +188,7 @@ Component({
         products: [this.properties.productInfo]
       });
       wx.navigateTo({
-        url: '/pages/order/index',
+        url: '/pages/order/index?mode=create',
       })
     },
     handleClose: function () {
@@ -219,6 +226,7 @@ Component({
           chosedFirst: e.currentTarget.dataset.item,
           firstOptionsColor: colors,
           price: info.price,
+          originalPrice:info.originalPrice,
           lastNum: info.lastNum,
         })
       } else {
@@ -235,6 +243,7 @@ Component({
             }
             this.setData({
               price: info.price,
+              originalPrice: info.originalPrice,
               lastNum: info.lastNum,
             })
             //设置被选择的颜色
@@ -287,6 +296,7 @@ Component({
           }
           this.setData({
             price: info.price,
+            originalPrice: info.originalPrice,
             lastNum: info.lastNum,
           })
           //设置被选择的颜色

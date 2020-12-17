@@ -59,6 +59,11 @@ Page({
    */
   onShow: function () {
   },
+  goOrderList:function(e){
+    wx.navigateTo({
+      url: '/pages/order/list?key='+e.currentTarget.dataset.key,
+    })
+  },
 
   handleLogin: function () {
     wx.login({

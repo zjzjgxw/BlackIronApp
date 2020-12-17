@@ -17,7 +17,8 @@ Page({
     hidePicker: true,
     pickerType: 'buy',
     cartNum: 0,
-    productId:0
+    productId: 0,
+    comments:[],
   },
 
   /**
@@ -25,7 +26,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      productId:options.id
+      productId: options.id
     })
     api.getProductInfo(options.id).then(result => {
       if (api.isSuccess(result)) {
@@ -34,11 +35,18 @@ Page({
         })
       }
     })
-
     let cart = wx.getStorageSync('cart') || [];
     this.setData({
       cartNum: cart.length
     })
+
+    api.getCommentOfProduct(options.id).then(result=>{
+      if(api.isSuccess(result)){
+        this.setData({
+          comments: result.data.rows
+        })
+      }
+    });
   },
 
   swiperChange: function (e) {
@@ -67,31 +75,21 @@ Page({
       cartNum: cart.length
     })
   },
-  goCart:function(){
-    if(!util.checkLogin()){
-      util.doLogin().then((res)=>{
-        wx.switchTab({
-          url: '/pages/cart/index',
-        })
-      })
-    }else{
-      wx.switchTab({
-        url: '/pages/cart/index',
-      })
-    }
+  goCart: function () {
+    wx.switchTab({
+      url: '/pages/cart/index',
+    })
   },
-  goHome:function(){
-    if(!util.checkLogin()){
-      util.doLogin().then((res)=>{
-        wx.switchTab({
-          url: '/pages/index/index',
-        })
-      })
-    }else{
-      wx.switchTab({
-        url: '/pages/index/index',
-      })
-    }
+  goHome: function () {
+    wx.switchTab({
+      url: '/pages/index/index',
+    })
+  },
+
+  goCommentList: function(){
+    wx.navigateTo({
+      url: '/pages/product/comments?productId='+this.data.detail.id,
+    })
   },
 
   /**
@@ -105,7 +103,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
- 
+
   },
 
   /**

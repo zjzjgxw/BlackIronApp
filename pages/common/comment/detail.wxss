@@ -1,0 +1,43 @@
+/* pages/common/comment/detail.wxss */
+
+.detail-container{
+  width: 100%;
+  background-color: #ffffff;
+  margin-top: 10rpx;
+}
+
+.user-swapper{
+  display: flex;
+  align-items: center;
+}
+
+.user-swapper image{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 60rpx;
+  margin-right: 20rpx;
+}
+
+.user-swapper p{
+  font-size: 26rpx;
+}
+
+.content-swapper{
+  margin-top: 10rpx;
+}
+
+.content-swapper .content p{ 
+  font-size: 26rpx;
+  opacity: 0.8;
+}
+
+.content-swapper .image-swapper{
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.content-swapper image{
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 10rpx;
+}

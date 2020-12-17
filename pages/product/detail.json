@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "pick-product":"../common/pick/pick",
-    "product-list": "../common/product/productList"
+    "product-list": "../common/product/productList",
+    "comment-item":"../common/comment/detail"
   }
 }

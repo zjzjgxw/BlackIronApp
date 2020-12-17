@@ -301,3 +301,41 @@ page {
   right: 20rpx;
   top: 20rpx;
 }
+
+
+.time-container{
+  display: flex;
+  flex-direction: column;
+  margin: 20rpx 20rpx;
+  border-radius: 10rpx;
+  padding: 30rpx 20rpx;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.time-container .time-swapper{
+  display: flex;
+}
+
+.time-container .desc{
+  font-size: 28rpx;
+  opacity: 0.8;
+}
+.express-container{
+  display: flex;
+  flex-direction: column;
+  margin: 20rpx 20rpx;
+  border-radius: 10rpx;
+  padding: 30rpx 20rpx;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.express-container .express-swapper{
+  display: flex;
+}
+
+.express-container .desc{
+  font-size: 28rpx;
+  opacity: 0.8;
+}

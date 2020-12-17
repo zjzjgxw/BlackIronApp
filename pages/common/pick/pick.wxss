@@ -29,7 +29,6 @@
 }
 
 .info-container .price-show{
-  width: 300rpx;
   display: flex;
   flex-direction: column;
 }
@@ -52,7 +51,6 @@
 
 .info-container .price-show view p{
   font-size: 24rpx;
-  opacity: 0.8;
   margin-left: 20rpx;
 }
 
@@ -177,4 +175,11 @@
 }
 .closs-button::before {
   content: “\2716”;
+}
+
+
+.line-through{
+  text-decoration:line-through;
+  color: #000;
+  opacity: 0.3;
 }

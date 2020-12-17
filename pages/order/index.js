@@ -9,27 +9,29 @@ Page({
     order: null,
     storeName: null,
     totalNum: 0,
-    totalPrice: 0,
+    totalPrice: 0, //商品总价
+    payPrice: 0, //实付金额
     expressPrice: 0,
     receiver: null,
     telphone: null,
+    province: null,
+    city: null,
+    county: null,
     address: null,
-    area: null,
     useCouponsNum: 0,
     coupon: null,
-    mode:"create",
-    productIds:[],
-    discountPirce:0
+    mode: "create",
+    remark: "",
+    productIds: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let order = wx.getStorageSync('order')
+    let order = wx.getStorageSync('order');
     let storeName = getApp().globalData.storeName;
 
-    console.log(order);
     let totalNum = 0;
     let totalPrice = 0;
     let expressPrice = 99999;
@@ -42,15 +44,38 @@ Page({
       };
       productIds.push(item.id);
     })
+    if (options.mode == "create") {
+      this.setData({
+        order,
+        storeName,
+        totalNum,
+        totalPrice,
+        payPrice: totalPrice + Number(expressPrice),
+        expressPrice,
+        productIds,
+        mode: options.mode
+      });
+    } else {
+      console.log(order);
+      this.setData({
+        order:order,
+        storeName,
+        totalNum,
+        province:order.province,
+        city:order.city,
+        county:order.county,
+        address:order.address,
+        receiver:order.receiver,
+        telphone:order.telphone,
+        payPrice:order.price,
+        expressPrice:order.expressPrice,
+        totalPrice:totalPrice,
+        productIds,
+        remark:order.remark,
+        mode:options.mode
+      })
+    }
 
-    this.setData({
-      order,
-      storeName,
-      totalNum,
-      totalPrice,
-      expressPrice,
-      productIds
-    });
 
     //获取可用的优惠券数量
     api.getCoupons(productIds).then(result => {
@@ -67,7 +92,7 @@ Page({
 
 
   submitOrder: function () {
-    if(this.data.receiver == null || this.data.telphone == null || this.data.address == null || this.data.area == null){
+    if (this.data.receiver == null || this.data.telphone == null || this.data.address == null) {
       wx.showToast({
         title: '请完善收件人信息',
         icon: 'none'
@@ -77,31 +102,35 @@ Page({
 
     let order = this.data.order;
     let items = [];
-    order.products.forEach(item=>{
+    order.products.forEach(item => {
       items.push({
-        productId:item.id,
-        specificationId:item.specificationId,
-        num:item.num
+        productId: item.id,
+        specificationId: item.specificationId,
+        num: item.num
       })
     })
 
     let params = {
       receiver: this.data.receiver,
       telphone: this.data.telphone,
-      address: this.data.area + " " + this.data.address,
-      couponId:this.data.coupon ? this.data.coupon.id : 0,
-      items:items
+      province: this.data.province,
+      city: this.data.city,
+      county: this.data.county,
+      address: this.data.address,
+      couponId: this.data.coupon ? this.data.coupon.id : 0,
+      items: items,
+      remark: this.data.remark
     }
 
     wx.showLoading({
       title: '正在提交订单',
-      mask:true
+      mask: true
     })
 
-    api.createOrder(params).then(result=>{
+    api.createOrder(params).then(result => {
       console.log(result);
       this.setData({
-        mode:"pay"
+        mode: "pay"
       })
       wx.hideLoading({
         success: (res) => {
@@ -112,7 +141,11 @@ Page({
 
   },
 
-
+  setRemark: function (e) {
+    this.setData({
+      remark: e.detail.value
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -129,19 +162,25 @@ Page({
     if (coupon != null) {
       this.setData({
         coupon,
-        discountPirce:coupon.price
+        payPrice: this.data.payPrice - coupon.price
       });
     }
+    let order = wx.getStorageSync('order')
+    this.setData({
+      order
+    });
   },
 
 
   selectAddress: function (res) {
-    if(this.data.mode == "create"){
+    if (this.data.mode == "create") {
       wx.chooseAddress({
         success: (result) => {
           console.log(result);
           this.setData({
-            area: result.provinceName + " " + result.cityName + " " + result.countyName,
+            province: result.provinceName,
+            city: result.cityName,
+            county: result.countyName,
             address: result.detailInfo,
             receiver: result.userName,
             telphone: result.telNumber
@@ -151,13 +190,18 @@ Page({
     }
   },
   goCoupons: function () {
-    if(this.data.mode == "create"){
+    if (this.data.mode == "create") {
       let idString = this.data.productIds.join(",")
       wx.navigateTo({
         url: `/pages/coupons/index?productId=${idString}`
       });
     }
-   
+  },
+
+  commentOrder: function(){
+    wx.navigateTo({
+      url: '/pages/order/comment',
+    })
   },
   onFail: function (res) {
     console.log(res);

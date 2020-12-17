@@ -1,0 +1,16 @@
+<!--pages/common/comment/detail.wxml-->
+<view class="detail-container">
+  <view class="user-swapper">
+    <image src="{{detail.coverUrl}}"></image>
+    <p>{{detail.userName}}</p>
+  </view>
+  <view class="content-swapper">
+    <view class="content">
+      <p>{{detail.content}}</p>
+    </view>
+    <view class="image-swapper" wx:if="{{detail.imgUrl.length > 0}}">
+      <image src="{{detail.imgUrl}}" bindtap="previewImage" data-src="{{detail.imgUrl}}"></image>
+    </view>
+  </view>
+</view>
+

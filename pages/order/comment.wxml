@@ -1,0 +1,58 @@
+<!--pages/order/comment.wxml-->
+
+<view class="comment-container" wx:for="{{order.products}}"   wx:for-index="index" wx:for-item="item"  wx:key="{{item.id}}">
+  <view class="product-container">
+    <view class="image-swapper">
+      <image src="{{item.coverUrl}}" mode="cover"></image>
+    </view>
+    <view class="desc">
+      <view class="title">
+        {{item.name}}
+      </view>
+      <view class="specification">
+            <p wx:if="{{item.firstValue}}">{{item.firstValue}}</p>
+            <p wx:if="{{item.secondValue}}">{{item.secondValue}}</p>
+            <p wx:if="{{item.firstSpecificationValue}}">{{item.firstSpecificationValue}}</p>
+            <p wx:if="{{item.secondSpecificationValue}}">{{item.secondSpecificationValue}}</p>
+          </view>
+    </view>
+  </view>
+  <view class="score-container">
+    <view class="title">
+      评价:
+    </view>
+    <view class="radio-g">
+      <radio-group data-product-id="{{item.productId}}" bindchange="radioChange">
+        <label class="radio-l">
+          <radio color="#fb504b" value="1" checked="true" />好评
+        </label>
+        <label class="radio-l">
+          <radio color="#fb504b"  value="2" />中评
+        </label>
+        <label class="radio-l">
+          <radio color="#fb504b" value="3" />差评
+        </label>
+      </radio-group>
+    </view>
+  </view>
+
+  <view class="text-container">
+    <textarea placeholder="请写下您的感（最多150个字符）" maxlength="150" data-product-id="{{item.productId}}"   bindblur="textChange" ></textarea>
+  </view>
+
+  <view class="uploader-container">
+    <view wx:for="{{params[item.productId].images}}" wx:for-index="index" wx:for-item="url" wx:key="{{url}}"   class="image-list" >
+      <image src="{{url}}" bindtap="previewImage" data-src="{{url}}"  mode="aspectFit"></image>
+    </view>
+    <view wx:if="{{ params[item.productId].images < maxImagesNum}}"   class="uploader"  data-product-id="{{item.productId}}"  bindtap="chooseImage">
+      <image src="/images/index/uploader.png" ></image>
+      <p>添加买家秀</p>
+    </view>
+  </view>
+</view>
+
+<view class="empty-container"></view>
+
+<view class="submit-container" bindtap="submit">
+  <p>提交</p>
+</view>

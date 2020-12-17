@@ -1,4 +1,5 @@
 <!--pages/cart/index.wxml-->
+<wxs src="../../utils/tools.wxs" module="tools" />
 
 <view>
 
@@ -23,7 +24,7 @@
             </view>
             <view class="num-container">
               <view class="price">
-                <p> ￥{{item.price}}</p>
+                <p> ￥{{tools.formatMoney(item.price)}}</p>
               </view>
               <view class="num-buttons">
                 <view class="wapper">
@@ -59,7 +60,7 @@
     <view class="button-swapper">
       <view class="total-price">
         <p class="number">
-        <p>合计:</p>￥{{totalPrice}}</p>
+        <p>合计:</p>￥{{tools.formatMoney(totalPrice)}}</p>
         <p class="express-info">不含邮费</p>
       </view>
       <view>

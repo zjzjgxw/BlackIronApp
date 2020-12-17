@@ -1,0 +1,11 @@
+<!--pages/product/comments.wxml-->
+<view wx:for="{{comments}}" class="comment-container" wx:for-index="index" wx:for-item="item" wx:key="{{item.id}}">
+  <view class="comment-swapper">
+    <comment-item detail="{{item}}"></comment-item>
+  </view>
+</view>
+
+
+<view wx:if="{{isFinished}}" class="finish-view">
+  没有更多评论啦~！
+</view>

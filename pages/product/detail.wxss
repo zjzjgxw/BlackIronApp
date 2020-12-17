@@ -202,3 +202,62 @@ swiper-item image {
   text-align: center;
   border-radius: 30rpx;
 }
+
+.line-through{
+  text-decoration:line-through;
+  color: #000;
+  opacity: 0.3;
+  margin-left: 10rpx;
+  font-size: 28rpx;
+}
+
+
+
+
+.icon-v-right {
+  width: 14rpx;
+  height: 14rpx;
+  border-top: 4rpx solid #111111;
+  border-right: 4rpx solid #111111;
+  opacity: 0.5;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 16rpx;
+  right: 20rpx;
+}
+
+.comment-container {
+  border-radius: 25rpx;
+  border-width: 2rpx;
+  border-color: #eaeaea;
+  background-color: #ffffff;
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
+}
+
+.comment-container .flex-container {
+  display: flex;
+}
+
+.flex-container .inner-item {
+  width: 50%;
+  margin-left: var(--left-width);
+  margin-bottom: var(--space-height);
+  margin-top: var(--space-height);
+}
+
+.flex-container .inner-item .title{
+  font-size: 26rpx;
+  opacity: 0.8;
+}
+
+
+.comment-container .flex-container .inner-item .desc{
+  font-size: 24rpx;
+  opacity: 0.5;
+}
+
+
+.comment-container .comment-swapper{
+  padding: var(--left-width) var(--space-height);
+}

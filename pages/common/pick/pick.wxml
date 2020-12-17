@@ -11,6 +11,7 @@
       <view class="price-show">
         <view>
           <p class="price-p" wx:if="{{price}}">￥{{ tools.formatMoney(price)}}</p>
+          <p wx:if="{{price != originalPrice }}"  class= "line-through">{{tools.formatMoney(originalPrice)}}</p>
           <p class="last-num" wx:if="{{lastNum}}"> 剩余{{lastNum}}</p>
         </view>
         <view wx:if="{{hasSpecifications}}">

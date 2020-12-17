@@ -19,6 +19,7 @@ Page({
     duration: 800,
     circular: true,
     categories:[],
+    advertisements:[]
   },
 
   swiperChange: function (e) {
@@ -44,6 +45,15 @@ Page({
   onReachBottom: function () {
     console.log("onReachBottom");
   },
+  adClick: function(e){
+    console.log(e);
+    const url = e.currentTarget.dataset.item.url;
+    if(url.length > 0){
+      wx.navigateTo({
+        url: url
+      })
+    }
+  },
   onLoad: function () {
     //获取轮播图
     api.getBanners().then(result=>{
@@ -63,7 +73,14 @@ Page({
       }
       return result.data.categories
     });
-    //获取推荐商品
+    //获取广告
+    api.getAdvertisements().then(result=>{
+      if(api.isSuccess(result)){
+        this.setData({
+          advertisements:result.data.advertisements
+        })
+      }
+    })
     
   },
 })

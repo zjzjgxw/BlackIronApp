@@ -1,0 +1,160 @@
+/* pages/order/list.wxss */
+
+page {
+  --price-color: #fb504b;
+  background-color: #f8f8f8;
+}
+
+
+
+.tab-container{
+  display: flex;
+  background-color: #ffffff;
+}
+
+.tab-container .item{
+  width: 20%;
+  text-align: center;
+  margin-top: 20rpx;
+}
+
+.divLineDark {
+  background: #000000;
+  width: 100%;
+  height: 2rpx;
+  margin-top: 20rpx;
+}
+
+.divLine {
+  background: #000000;
+  opacity: 0.2;
+  width: 100%;
+  height: 2rpx;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: show;
+}
+
+
+.order-list{
+  background-color: #ffffff;
+  margin: 20rpx 20rpx;
+  border-radius: 10rpx;
+  padding: 30rpx 20rpx;
+}
+
+.order-list .order-code{
+  display:flex;
+  margin-bottom: 20rpx;
+}
+
+.title-swapper{
+  display: flex;
+  position: relative;
+}
+
+.title-swapper .status-button{
+  position: absolute;
+  right: 10rpx;
+  top:-10rpx;
+  font-size: 24rpx;
+  background-color: #fb504b;
+  padding: 10rpx 20rpx;
+  border-radius: 40rpx;
+  color: #ffffff;
+}
+
+.order-list .order-code p{
+  font-size: 24rpx;
+  opacity: 0.5;
+  margin-left: 10rpx;
+}
+
+
+.product-item{
+  display:flex;
+  padding-top:10rpx;
+  padding-bottom:10rpx;
+}
+
+.product-item .product-image image{
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 20rpx;
+}
+
+.product-item .info-swapper {
+  padding-left: 10rpx;
+  position: relative;
+  width: 100%;
+}
+
+
+.product-item .info-swapper .title{
+  opacity: 0.8;
+  overflow: hidden;
+  max-height: 80rpx;
+  font-size: 28rpx;
+}
+
+.product-item .info-swapper .specification p{
+  opacity: 0.5;
+  font-size: 20rpx;
+  margin-right: 20rpx;
+}
+
+
+.product-item .info-swapper .price-swapper{
+  display:flex;
+  position: absolute;
+  bottom: 0rpx;
+  width: 100%;
+}
+
+.product-item .info-swapper .price-swapper .price{
+  opacity: 0.8;
+  font-size: 28rpx;
+}
+
+
+.product-item .info-swapper .price-swapper .num{
+  opacity: 0.5;
+  font-size: 24rpx;
+  position: absolute;
+  right: 20rpx;
+  top: 10rpx
+}
+
+.total-container{
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.total-container .total-number{
+  font-size: 30rpx;
+  opacity: 0.8;
+  margin-right: 10rpx;
+}
+
+.total-container .total-price{
+  font-size: 30rpx;
+  opacity: 0.8;
+}
+
+.total-container .total-price p{
+  color: var(--price-color);
+}
+
+
+.finish-view{
+  text-align: center;
+  font-size: 28rpx;
+  opacity: 0.5;
+  padding-top: 20rpx;
+  padding-bottom: 40rpx;
+}

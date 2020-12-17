@@ -1,0 +1,62 @@
+<!--pages/order/list.wxml-->
+<wxs src="../../utils/tools.wxs" module="tools" />
+
+<view class="tab-container">
+  <view class="item" wx:for="{{tabs}}" wx:for-index="index" wx:for-item="item" wx:key="{{item.key}}"
+    data-active-key="{{item.key}}" bindtap="selcetTab">
+    {{item.title}}
+    <view class="divLineDark {{item.visable}}"></view>
+  </view>
+</view>
+
+<view class="order-container">
+
+  <view class="order-list" wx:for="{{orders}}" wx:for-index="index" wx:for-item="order" wx:key="{{order.id}}"  >
+    <view class="title-swapper">
+      <view class="order-code">
+        <p>订单编号 {{order.code}}</p>
+      </view>
+      <view wx:if="{{order.status.index == 1}}"  class="status-button"  data-order="{{order}}" bindtap="goOrderDetail">
+        去支付
+      </view>
+      <view wx:if="{{order.status.index != 1}}"  class="status-button"  data-order="{{order}}" bindtap="goOrderDetail">
+        查看详情
+      </view>
+    </view>
+
+    <view class="divLine "></view>
+
+    <view class="product-list">
+      <view class="product-item" wx:for="{{order.items}}" wx:for-index="index" wx:for-item="item">
+        <view class="product-image">
+          <image src="{{item.coverUrl}}" mode="cover"></image>
+        </view>
+        <view class="info-swapper">
+          <view class="title">
+            {{item.name}}
+          </view>
+          <view class="specification">
+            <p wx:if="{{item.firstSpecificationValue}}">{{item.firstSpecificationValue}}</p>
+            <p wx:if="{{item.secondSpecificationValue}}">{{item.secondSpecificationValue}}</p>
+          </view>
+          <view class="price-swapper">
+            <view class="price">￥{{tools.formatMoney(item.price) }}</view>
+            <view class="num">×{{item.num}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="total-container">
+      <view class="total-price">
+        实付: <p>￥{{tools.formatMoney(order.price)}}</p>
+      </view>
+    </view>
+
+  </view>
+
+</view>
+
+<view wx:if="{{isFinished}}" class="finish-view">
+  没有更多订单啦
+</view>

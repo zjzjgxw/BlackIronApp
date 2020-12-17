@@ -1,7 +1,4 @@
-const {
-  isSuccess
-} = require('../../../utils/api.js');
-// pages/common/product/productList.js
+
 const api = require('../../../utils/api.js')
 
 Component({

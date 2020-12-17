@@ -16,6 +16,8 @@
   <view class="title-container">
     <view class="price">
       <p>￥{{tools.formatMoney(detail.price)}}</p>
+      <p wx:if="{{detail.price != detail.originalPrice }}" class="line-through">
+        {{tools.formatMoney(detail.originalPrice)}}</p>
     </view>
     <view class="title">
       <p> {{detail.name}}</p>
@@ -31,7 +33,7 @@
     </view>
     <view class="express">
       <view wx:if="{{detail.expressPrice < 0.001}}"> 免运费 </view>
-      <view class="price" wx:elif="{{detail.expressPrice > 0}}"> ￥{{detail.expressPrice}} </view>
+      <view class="price" wx:elif="{{detail.expressPrice > 0}}"> ￥{{tools.formatMoney(detail.expressPrice)}} </view>
     </view>
     <view class="sales">
       <p> 已售{{detail.saleNum}}</p>
@@ -45,6 +47,27 @@
     <view class="desc">
       线下门店 快递发货 到店自提
     </view>
+  </view>
+
+  <view wx:if="{{comments.length > 0}}" class="comment-container">
+    <view class="flex-container" bindtap="goCommentList">
+      <view class="inner-item">
+        <p class="title"> 商品评论（{{comments.length}}） </p>
+      </view>
+      <view class="inner-item">
+        <view style="position:relative; display:flex">
+          <view style="position:absolute;  right:40rpx">
+            <p class="desc"> 查看全部评论 </p>
+          </view>
+          <view class="icon-v-right" style="" />
+        </view>
+      </view>
+    </view>
+
+    <view class="comment-swapper">
+      <comment-item detail="{{comments[0]}}"></comment-item>
+    </view>
+
   </view>
 
   <view class="detail-container">
@@ -80,6 +103,6 @@
     </view>
   </view>
 
-  <pick-product class="product-picker " hidden="{{hidePicker}}" type="{{pickerType}}" productInfo="{{detail}}" productId="{{productId}}"
-    imgUrl="{{detail.coverUrl}}"  bind:onAddCartEvent="onAddCartEvent"></pick-product>
+  <pick-product class="product-picker " hidden="{{hidePicker}}" type="{{pickerType}}" productInfo="{{detail}}"
+    productId="{{productId}}" imgUrl="{{detail.coverUrl}}" bind:onAddCartEvent="onAddCartEvent"></pick-product>
 </view>
