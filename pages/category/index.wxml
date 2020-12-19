@@ -1,21 +1,8 @@
-<!--pages/common/product/productList.wxml-->
-<!-- <scroll-view bindscrolltolower="getMoreData" scroll-y lower-threshold="80"> -->
+<!--pages/category/index.wxml-->
 
-<wxs src="../../../utils/tools.wxs" module="tools" />
+<wxs src="../../utils/tools.wxs" module="tools" />
 
 <scroll-view>
-  <view wx:if="{{imgUrl.length === 0 }}">
-       <view class="title">
-         {{title}}
-       </view>
-       		<!-- 分割线 -->
-			<view class="divLine"></view>
-  </view>
-  <view wx:if="{{imgUrl.length !== 0 }}">
-       <view class="title">
-        <image src="{{imgUrl}}" mode="widthFix" data-item="{{item}}" bindtap="adClick" />
-       </view>
-  </view>
   <view class="list-container"  >
       <view class="card"   wx:for="{{products}}" wx:for-index="index"  wx:for-item="item" data-item-id="{{item.id}}"  bindtap="handleClick" >
       <view class="card-image">
@@ -37,7 +24,12 @@
         </view>
       </view>
     </view>
-    
+  </view>
 
+  <view wx:if="{{products.length === 0}}">
+    <view class="empty-swapper">
+      <image src="../../images/index/empty.png" mode="cover"></image>
+      <p>暂无数据</p>
+    </view>
   </view>
 </scroll-view>

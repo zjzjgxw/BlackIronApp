@@ -113,6 +113,11 @@ module.exports = {
       businessId: BUSINESS_ID
     })
   },
+  getNavigations() {
+    return requestData(WEB_DOMAIN + "/app/home/navigations", {
+      businessId: BUSINESS_ID
+    })
+  },
   getProductsOfCategory(categoryId, pageNum = 1, pageSize = 10) {
     return requestData(WEB_DOMAIN + "/app/products", {
       businessId: BUSINESS_ID,

@@ -19,7 +19,8 @@ Page({
     duration: 800,
     circular: true,
     categories:[],
-    advertisements:[]
+    advertisements:[],
+    navigations:[],
   },
 
   swiperChange: function (e) {
@@ -46,7 +47,6 @@ Page({
     console.log("onReachBottom");
   },
   adClick: function(e){
-    console.log(e);
     const url = e.currentTarget.dataset.item.url;
     if(url.length > 0){
       wx.navigateTo({
@@ -63,16 +63,15 @@ Page({
         })
       }
     })
-
-    //获取类目
-    api.getAllCategory().then(result=>{
+    //获取导航项目
+    api.getNavigations().then(result=>{
       if(api.isSuccess(result)){
         this.setData({
-          categories:result.data.categories
+          navigations:result.data.navigations
         })
       }
-      return result.data.categories
     });
+    
     //获取广告
     api.getAdvertisements().then(result=>{
       if(api.isSuccess(result)){
@@ -80,7 +79,37 @@ Page({
           advertisements:result.data.advertisements
         })
       }
-    })
-    
+    });
+
+    //获取类目
+    api.getAllCategory().then(result=>{
+      if(api.isSuccess(result)){
+        console.log(result);
+        let categoryList = [];
+        result.data.categories.forEach(item=>{
+          if(item.showFlag){
+            categoryList.push(item);
+          }
+        });
+        this.setData({
+          categories:categoryList
+        })
+      }
+      return result.data.categories
+    });
+  
+  },
+  onShow:function(){
+    let cart = wx.getStorageSync('cart') || [];
+    if(cart.length > 0){
+      wx.setTabBarBadge({
+        index: 1,
+        text: `${cart.length}`,
+      })
+    }else{
+      wx.hideTabBarRedDot({
+        index: 1,
+      })
+    }
   },
 })

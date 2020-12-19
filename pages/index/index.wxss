@@ -48,3 +48,20 @@ height: 100%;
   width: 100%;
 }
 
+.navigations-container{
+  display: flex;
+  flex-wrap:wrap;
+  margin-top: 20rpx;
+}
+
+.navigations-container view{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  padding-top: 20rpx;
+}
+
+.navigations-container view image{
+  width: 250rpx;
+  height: 125rpx;
+}

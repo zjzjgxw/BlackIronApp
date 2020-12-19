@@ -10,7 +10,8 @@
     "pages/coupons/index",
     "pages/order/list",
     "pages/order/comment",
-    "pages/product/comments"
+    "pages/product/comments",
+    "pages/category/index"
   ],
   "tabBar": {
     "color": "#cdcdcd",

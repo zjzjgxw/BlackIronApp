@@ -10,7 +10,7 @@ Page({
     detail: {},
     swiperCurrent: 0,
     indicatorDots: true,
-    autoplay: true,
+    autoplay: false,
     interval: 3000,
     duration: 800,
     circular: true,
@@ -30,6 +30,7 @@ Page({
     })
     api.getProductInfo(options.id).then(result => {
       if (api.isSuccess(result)) {
+        console.log(result);
         this.setData({
           detail: result.data.detail
         })

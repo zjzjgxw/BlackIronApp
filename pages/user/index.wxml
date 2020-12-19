@@ -19,7 +19,7 @@
 		<view class="info-container">
 			<view class="info-item">
 				<p class="p-number">
-					10
+					{{userInfo.point}}
 				</p>
 				<p class="p-text">
 					积分
@@ -84,12 +84,5 @@
 			</view>
 		</view>
 
-
-		<view style="padding:20rpx 20rpx;">
-			<product-list type="recommend" title="推荐">
-			</product-list>
-		</view>
-
 	</view>
-
 </view>

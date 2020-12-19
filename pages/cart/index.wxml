@@ -46,9 +46,11 @@
     </mp-slideview>
   </view>
 
-  <view style="padding:20rpx 20rpx; margin-bottom:100rpx;">
-    <product-list type="recommend" title="推荐">
-    </product-list>
+  <view wx:if="{{cart.length === 0}}">
+    <view class="empty-swapper">
+      <image src="../../images/index/empty.png" mode="cover"></image>
+      <p>暂无数据</p>
+    </view>
   </view>
 
 
@@ -64,7 +66,7 @@
         <p class="express-info">不含邮费</p>
       </view>
       <view>
-        <button plain="true" bindtap="handleOrder" > 结算</button>
+        <button plain="true" bindtap="handleOrder"> 结算</button>
       </view>
     </view>
 

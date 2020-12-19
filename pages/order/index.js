@@ -128,15 +128,23 @@ Page({
     })
 
     api.createOrder(params).then(result => {
-      console.log(result);
-      this.setData({
-        mode: "pay"
-      })
       wx.hideLoading({
         success: (res) => {
           console.log(res);
         },
       })
+      if(api.isSuccess(result)){
+        this.setData({
+          mode: "pay"
+        })
+      }else{
+        wx.showToast({
+          title: "创建订单失败",
+          icon: 'error',
+          duration: 2000
+        })
+      }
+   
     })
 
   },

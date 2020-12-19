@@ -17,13 +17,20 @@ swiper-item image {
 }
 
 .swiper-container .swiper {
-  height: 500rpx;
+  width: 800rpx;
+  height: 800rpx;
 }
 
 .swiper-container .swiper .img {
   width: 100%;
   height: 100%;
 }
+
+.swiper-container .swiper video{
+  width: 100%;
+  height: 100%;
+}
+
 
 .title-container {
   padding-left: var(--left-width);

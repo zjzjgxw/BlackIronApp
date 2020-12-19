@@ -11,12 +11,10 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         api.weixinLogin(res.code).then(res => {
-          console.log(res)
           if (api.isSuccess(res)) {
             this.globalData.token = res.data.accessToken
             //获取用户信息
             api.getUserInfo().then(result => {
-              console.log(result)
               if (result.code == 200) {
                 this.globalData.userInfo = result.data.user
               }

@@ -6,9 +6,16 @@
   <view class="swiper-container">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
       circular="{{duration}}" current="{{swiperCurrent}}" bindchange="swiperChange" class="swiper">
+
+      <block wx:if="{{detail.videoUrl.length > 0}}">
+        <swiper-item>
+          <video id="myVideo"  src="{{detail.videoUrl}}" object-fit="cover" > </video>
+        </swiper-item>
+      </block>
+
       <block wx:for="{{detail.mainImages}}" wx:key="unique">
         <swiper-item>
-          <image src="{{item.imgUrl}}" class="img" />
+          <image src="{{item.imgUrl}}" class="img"  mode="widthFix" />
         </swiper-item>
       </block>
     </swiper>
@@ -76,12 +83,12 @@
     </view>
     <view class="image-list">
       <block wx:for="{{detail.detailImages}}" wx:key="unique">
-        <image src="{{item.imgUrl}}" class="img" />
+        <image src="{{item.imgUrl}}" class="img"  mode="widthFix" />
       </block>
     </view>
   </view>
 
-  <view style="padding:20rpx 20rpx;">
+  <view >
     <product-list type="recommend" title="推荐">
     </product-list>
   </view>

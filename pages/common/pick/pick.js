@@ -136,6 +136,7 @@ Component({
         });
         return false;
       }
+     
       this.properties.productInfo['price'] = this.data.price;
       this.properties.productInfo['num'] = this.data.num;
       this.properties.productInfo['firstName'] = this.data.firstName;

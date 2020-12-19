@@ -15,19 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let cart = wx.getStorageSync('cart') || [];
-    console.log(cart);
-    cart.forEach(item=>{
-      item['isSelected'] = true;
-    });
-    this.setData({
-      cart:cart,
-      slideButtons: [{
-        text: '删除',
-        src: '/images/index/delete.png', // icon的路径
-      }],
-      totalPrice:this.getTotalPrice(cart)
-    })
+    
 
   },
 
@@ -138,11 +126,11 @@ Page({
       }
     })
     wx.setStorageSync('order', {products:products});
+    wx.setStorageSync('cart', []);
     wx.navigateTo({
       url: '/pages/order/index?mode=create',
     })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -154,7 +142,29 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let cart = wx.getStorageSync('cart') || [];
+    cart.forEach(item=>{
+      item['isSelected'] = true;
+    });
+    this.setData({
+      cart:cart,
+      slideButtons: [{
+        text: '删除',
+        src: '/images/index/delete.png', // icon的路径
+      }],
+      totalPrice:this.getTotalPrice(cart)
+    })
 
+    if(cart.length > 0){
+      wx.setTabBarBadge({
+        index: 1,
+        text: `${cart.length}`,
+      })
+    }else{
+      wx.hideTabBarRedDot({
+        index: 1,
+      })
+    }
   },
 
   /**

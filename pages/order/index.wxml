@@ -34,7 +34,9 @@
       </view>
       <view class="fee">
         <p>快递</p>
-        <p>免运费</p>
+
+        <p wx:if="{{expressPrice === 0}}">免运费</p>
+        <p wx:if="{{expressPrice !== 0}}">￥{{tools.formatMoney(expressPrice)}}</p>
       </view>
     </view>
   </view>

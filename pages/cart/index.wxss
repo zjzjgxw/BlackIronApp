@@ -167,4 +167,22 @@ page {
   margin: 10rpx 20rpx;
 }
 
+.empty-swapper{
+  width: 100%;
+  height: 720rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-swapper image{
+  width: 155rpx;
+  height: 128rpx;
+}
+
+.empty-swapper p{
+  color: #000;
+  opacity: 0.5;
+}
 

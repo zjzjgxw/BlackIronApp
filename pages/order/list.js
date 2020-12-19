@@ -74,6 +74,7 @@ Page({
         success: (res) => {},
       })
       if(api.isSuccess(result)){
+        console.log(result);
         let isFinished = false;
         if(result.data.rows.length < this.data.pageSize){
           isFinished = true

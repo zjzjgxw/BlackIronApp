@@ -9,6 +9,7 @@ Component({
     type: String, // list 为商品类目列表， recommend 为推荐类别
     categoryId: Number,
     title: String,
+    imgUrl:String,
   },
 
   /**
