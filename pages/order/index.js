@@ -23,6 +23,7 @@ Page({
     mode: "create",
     remark: "",
     productIds: [],
+    prepayId:null,
   },
 
   /**
@@ -30,8 +31,7 @@ Page({
    */
   onLoad: function (options) {
     let order = wx.getStorageSync('order');
-    let storeName = getApp().globalData.storeName;
-
+    let storeName = getApp().globalData.storeInfo.name;
     let totalNum = 0;
     let totalPrice = 0;
     let expressPrice = 99999;
@@ -56,7 +56,6 @@ Page({
         mode: options.mode
       });
     } else {
-      console.log(order);
       this.setData({
         order:order,
         storeName,
@@ -80,6 +79,11 @@ Page({
     //获取可用的优惠券数量
     api.getCoupons(productIds).then(result => {
       if (api.isSuccess(result)) {
+        result.data.coupons.forEach(item=>{
+          if(item.targetPrice > totalPrice){
+            item.status = {index:4,text:"不可用"} 
+          }
+        })
         let useCoupons = result.data.coupons.filter(item => {
           return item.status.index == 0
         })
@@ -135,7 +139,8 @@ Page({
       })
       if(api.isSuccess(result)){
         this.setData({
-          mode: "pay"
+          mode: "pay",
+          order:{...this.data.order,id:result.data.id}
         })
       }else{
         wx.showToast({
@@ -144,9 +149,7 @@ Page({
           duration: 2000
         })
       }
-   
     })
-
   },
 
   setRemark: function (e) {
@@ -155,6 +158,30 @@ Page({
     })
   },
 
+  payOrder: function(){
+
+    const userInfo = getApp().globalData.userInfo;
+    api.getPayId(this.data.order.id,userInfo.openId).then(result=>{
+      if(api.isSuccess(result)){
+        console.log(result);
+        wx.requestPayment({
+          nonceStr: result.data.nonceStr,
+          package: result.data.package,
+          paySign: result.data.paySign,
+          timeStamp:result.data.timeStamp+"",
+          signType:result.data.signType,
+          success:function(res){
+            console.log("successs");
+            console.log(res);
+          },
+          fail:function(res){
+            console.log("fail");
+            console.log(res);
+          }
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -178,7 +205,6 @@ Page({
       order
     });
   },
-
 
   selectAddress: function (res) {
     if (this.data.mode == "create") {

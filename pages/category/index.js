@@ -25,6 +25,11 @@ Page({
     })
   },
 
+  handleClick: function(e){
+    wx.navigateTo({
+      url: `/pages/product/detail?id=${e.currentTarget.dataset.itemId}`
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

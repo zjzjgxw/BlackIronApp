@@ -1,0 +1,11 @@
+<!--pages/user/auth.wxml-->
+<view class="user-container">
+  <view class="userinfo">
+    <image class="userinfo-avatar" src="{{storeInfo.logoImg}}" mode="cover"></image>
+    <text class="userinfo-nickname">{{storeInfo.name}}</text>
+  </view>
+</view>
+<button  class="login-button" bindgetuserinfo="getUser" open-type="getUserInfo" type="primary">微信授权登录</button>
+<view  wx:if="{{settingVisable}}" class="setting-swapper">
+  <button class="setting-button"  open-type="openSetting" plain="true"  type="default">设置权限</button>
+</view>

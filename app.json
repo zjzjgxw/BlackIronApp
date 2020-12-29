@@ -11,7 +11,8 @@
     "pages/order/list",
     "pages/order/comment",
     "pages/product/comments",
-    "pages/category/index"
+    "pages/category/index",
+    "pages/user/auth"
   ],
   "tabBar": {
     "color": "#cdcdcd",

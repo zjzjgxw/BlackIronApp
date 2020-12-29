@@ -1,4 +1,5 @@
-const api = require("../../utils/api")
+const api = require("../../utils/api");
+const util = require("../../utils/util");
 
 // pages/product/detail.js
 Page({
@@ -31,6 +32,11 @@ Page({
     api.getProductInfo(options.id).then(result => {
       if (api.isSuccess(result)) {
         console.log(result);
+        if(result.data.detail == null){
+          wx.navigateBack({
+            delta: 0,
+          })
+        }
         this.setData({
           detail: result.data.detail
         })
@@ -57,6 +63,7 @@ Page({
   },
 
   handleBuy: function (e) {
+    util.checkLogin();
     this.setData({
       hidePicker: false,
       pickerType: 'buy'
@@ -64,6 +71,7 @@ Page({
   },
 
   handleAddCart: function () {
+    util.checkLogin();
     this.setData({
       hidePicker: false,
       pickerType: 'cart'
@@ -139,6 +147,19 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    const detail = this.data.detail;
+    return {
+      title: detail.name,
+      path: `/pages/product/detail?id=${detail.id}`,
+      imageUrl:detail.coverUrl
+    }
+  },
+  onShareTimeline:function(){
+    const detail = this.data.detail;
+    return {
+      title: detail.name,
+      path: `/pages/product/detail?id=${detail.id}`,
+      imageUrl:detail.coverUrl
+    }
   }
 })

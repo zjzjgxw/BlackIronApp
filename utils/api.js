@@ -6,22 +6,24 @@
  */
 function requestData(url, data, method = "get") {
   const app = getApp();
-  if (app.debug) {
-    console.log('requestData url: ', url);
+  let header = {};
+  if(app == undefined ||  app.globalData.token == null){
+    header = {
+      'Content-Type': 'application/json',
+    }
+  }else{
+   header =  {
+      'Content-Type': 'application/json',
+      'Authorization': app.globalData.token
+    }
   }
   return new Promise(function (resolve, reject) {
     wx.request({
       url: url,
       data: data || {},
       method: method,
-      header: {
-        'Content-Type': 'application/json',
-        'Authorization': app.globalData.token
-      },
+      header: header,
       success: function (res) {
-        if (app.debug) {
-          console.log('response data: ', res);
-        }
         if (res.statusCode == 200) {
           resolve(res.data);
         } else {
@@ -56,12 +58,20 @@ function uploadFile(url, filePath) {
 }
 
 
-const WEB_DOMAIN = "http://192.168.0.100:9800"
+// const WEB_DOMAIN = "https://store.mynatapp.cc"
+const WEB_DOMAIN = "http://127.0.0.1:9800"
 const BUSINESS_ID = 2
 
 const isSuccess = res => {
   if (res.code == 200) {
     return true;
+  }else{
+    //未登录则跳转到登录页面
+    if(res.code == 401){
+      wx.navigateTo({
+        url: '/pages/user/auth',
+      })
+    }
   }
   return false;
 }
@@ -70,7 +80,13 @@ module.exports = {
   isSuccess: isSuccess,
   weixinLogin(code) {
     return requestData(WEB_DOMAIN + "/sso/users/wxlogin", {
-      "code": code
+      "code": code,
+      businessId: BUSINESS_ID
+    })
+  },
+  getBusinessInfo() {
+    return requestData(WEB_DOMAIN + "/app/home", {
+      businessId: BUSINESS_ID
     })
   },
   getBanners() {
@@ -79,7 +95,7 @@ module.exports = {
     })
   },
   updateUserInfo(data) {
-    return requestData(WEB_DOMAIN + "/users/wx", data, "put")
+    return requestData(WEB_DOMAIN + "/app/users/wx", data, "PUT")
   },
   getUserInfo() {
     return requestData(WEB_DOMAIN + "/app/users/current", {})
@@ -140,6 +156,12 @@ module.exports = {
   },
   createOrder(params) {
     return requestData(WEB_DOMAIN + "/app/orders", params, "POST")
+  },
+  getPayId(orderId,openId){
+    return requestData(WEB_DOMAIN + "/app/pay", {
+      orderId: orderId,
+      openId: openId
+    })
   },
   getOrderList(statuses = [], pageNum = 1, pageSize = 10) {
     if (statuses.length > 0) {

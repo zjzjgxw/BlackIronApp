@@ -54,6 +54,15 @@ Page({
       })
     }
   },
+
+  swipClick:function(e){
+    const url = e.currentTarget.dataset.item.url;
+    if(url.length > 0){
+      wx.navigateTo({
+        url: url
+      })
+    }
+  },
   onLoad: function () {
     //获取轮播图
     api.getBanners().then(result=>{
@@ -112,4 +121,23 @@ Page({
       })
     }
   },
+
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    const app = getApp();
+    return {
+      title: app.globalData.storeInfo.name,
+      path: 'pages/index/index'
+    }
+  },
+  onShareTimeline:function(){
+    const app = getApp();
+    return {
+      title: app.globalData.storeInfo.name,
+      path: 'pages/index/index'
+    }
+  }
 })

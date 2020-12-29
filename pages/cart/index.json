@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "购物车",
   "usingComponents": {
     "mp-slideview": "weui-miniprogram/slideview/slideview",
     "product-list": "../common/product/productList"

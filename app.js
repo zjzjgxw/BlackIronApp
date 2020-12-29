@@ -2,34 +2,38 @@
 const api = require('./utils/api.js')
 
 App({
-  onLaunch: function () {
-    // // 展示本地存储能力
-    // var logs = wx.getStorageSync('logs') || []
-    // logs.unshift(Date.now())
-    // wx.setStorageSync('logs', logs)
+  onLaunch: function (options) {
+    //登录
     wx.login({
       success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
         api.weixinLogin(res.code).then(res => {
           if (api.isSuccess(res)) {
             this.globalData.token = res.data.accessToken
-            //获取用户信息
-            api.getUserInfo().then(result => {
-              if (result.code == 200) {
-                this.globalData.userInfo = result.data.user
-              }
-            })
           } else {
             console.log(res.msg)
           }
         })
       }
-    })
+    });
+  },
 
+  onShow:function(){
+    api.getBusinessInfo().then(res=>{
+      if(api.isSuccess(res)){
+        this.globalData.storeInfo = res.data.business
+        wx.setNavigationBarTitle({
+          title: res.data.business.name,
+        })
+      }else{
+        wx.showToast({
+          title: '请求出错',
+        });
+      }
+    })
   },
   globalData: {
     userInfo: null,
     token: null,
-    storeName:"19Flower"
+    storeInfo: null,
   }
 })

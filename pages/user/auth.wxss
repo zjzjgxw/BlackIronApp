@@ -1,0 +1,44 @@
+/* pages/user/auth.wxss */
+
+.user-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50rpx 0;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  margin-top: 100rpx;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #000000;
+  opacity: 0.8;
+}
+
+.login-button{
+  border-radius: 40rpx;
+}
+
+.setting-swapper{
+  margin-top: 40rpx;
+}
+
+.setting-button{
+  border-radius: 40rpx;
+}

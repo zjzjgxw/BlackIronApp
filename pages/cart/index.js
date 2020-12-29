@@ -1,3 +1,5 @@
+const util = require("../../utils/util");
+
 // pages/cart/index.js
 Page({
 
@@ -119,12 +121,18 @@ Page({
   },
 
   handleOrder:function(){
+    if(!util.checkLogin()){
+      return;
+    };
     let products = [];
     this.data.cart.forEach(item=>{
       if(item.isSelected){
         products.push(item);
       }
     })
+    if(products.length == 0){
+      return;
+    }
     wx.setStorageSync('order', {products:products});
     wx.setStorageSync('cart', []);
     wx.navigateTo({
@@ -165,6 +173,12 @@ Page({
         index: 1,
       })
     }
+  },
+
+  handleProductTap:function(e){
+    wx.navigateTo({
+      url: `/pages/product/detail?id=${e.currentTarget.dataset.itemId}`
+    });
   },
 
   /**

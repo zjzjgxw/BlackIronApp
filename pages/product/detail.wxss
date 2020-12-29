@@ -17,8 +17,8 @@ swiper-item image {
 }
 
 .swiper-container .swiper {
-  width: 800rpx;
-  height: 800rpx;
+  width: 750rpx;
+  height: 750rpx;
 }
 
 .swiper-container .swiper .img {

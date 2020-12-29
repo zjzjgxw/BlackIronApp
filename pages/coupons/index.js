@@ -9,24 +9,24 @@ Page({
    */
   data: {
     tabs: [{
-      key:1,
-      title:"可用",
-      visable:"show"
-    },{
-      key:2,
-      title:"全部",
-      visable:"hidden"
+      key: 1,
+      title: "可用",
+      visable: "show"
+    }, {
+      key: 2,
+      title: "全部",
+      visable: "hidden"
     }],
-    coupons:[],
-    useCoupons:[],
+    coupons: [],
+    useCoupons: [],
   },
 
-  selectTap: function(e){
+  selectTap: function (e) {
     let tabs = this.data.tabs;
-    tabs.forEach(item=>{
-      if(item.key === e.currentTarget.dataset.item.key){
+    tabs.forEach(item => {
+      if (item.key === e.currentTarget.dataset.item.key) {
         item.visable = "show"
-      }else{
+      } else {
         item.visable = "hidden"
       }
     })
@@ -35,13 +35,27 @@ Page({
     })
   },
 
-  getCoupons: function(productIds){
-    api.getCoupons(productIds).then(result=>{
-      if(api.isSuccess(result)){
-        let useCoupons = result.data.coupons.filter(item=>{return item.status.index == 0})
+  getCoupons: function (productIds) {
+    api.getCoupons(productIds).then(result => {
+      if (api.isSuccess(result)) {
+        
+        let order = wx.getStorageSync('order');
+        let totalPrice = 0;
+        order.products.forEach(item => {
+          totalPrice += (item.price * item.num);
+        })
+        result.data.coupons.forEach(item=>{
+          if(item.targetPrice > totalPrice){
+            item.status = {index:4,text:"不可用"} 
+          }
+        })
+        let useCoupons = result.data.coupons.filter(item => {
+          return item.status.index == 0
+        })
+
         this.setData({
-          coupons:result.data.coupons,
-          useCoupons:useCoupons
+          coupons: result.data.coupons,
+          useCoupons: useCoupons
         })
       }
     })
@@ -51,27 +65,27 @@ Page({
    */
   onLoad: function (options) {
     let productIds = options.productId.split(",");
-    if(!util.checkLogin()){
-      util.doLogin().then((res)=>{
+    if (!util.checkLogin()) {
+      util.doLogin().then((res) => {
         this.getCoupons(productIds)
       })
-    }else{
+    } else {
       this.getCoupons(productIds)
     }
   },
 
-  selectCoupon: function(e){
+  selectCoupon: function (e) {
     console.log(e);
     let item = e.currentTarget.dataset.item;
-    if(item.status.index ==0){
+    if (item.status.index == 0) {
       wx.setStorageSync('coupon', item);
       wx.navigateBack({
         delta: 0,
       })
-    }else{
+    } else {
       wx.showToast({
         title: '优惠券不可用',
-        icon:"none"
+        icon: "none"
       })
     }
   },

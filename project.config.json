@@ -13,7 +13,7 @@
     "newFeature": false,
     "coverView": true,
     "nodeModules": false,
-    "autoAudits": true,
+    "autoAudits": false,
     "showShadowRootInWxmlPanel": true,
     "scopeDataCheck": false,
     "uglifyFileName": false,
@@ -21,8 +21,6 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": false,
-    "useApiHook": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -31,13 +29,12 @@
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
-    "minifyWXSS": true
+    "useMultiFrameRuntime": false,
+    "useApiHook": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.12.1",
-  "appid": "wxc64bc39ddca391d2",
+  "appid": "wxd03b36e244628e06",
   "projectname": "drummer",
   "debugOptions": {
     "hidedInDevtools": []

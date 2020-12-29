@@ -23,6 +23,9 @@ const formatMoney = money=>{
 const checkLogin = function () {
   const app = getApp();
   if (app.globalData.token == null) {
+    wx.navigateTo({
+      url: '/pages/user/auth',
+    })
     return false;
   }
   return true;

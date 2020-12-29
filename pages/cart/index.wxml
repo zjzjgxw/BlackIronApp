@@ -10,7 +10,7 @@
           <radio color="#fb504b" data-item="{{item}}" checked="{{item.isSelected}}" bindtap="handleRadioChange" />
         </view>
         <view class="item-swapper">
-          <view>
+          <view data-item-id="{{item.id}}" bindtap="handleProductTap">
             <image src="{{item.coverUrl}}" mode="cover"></image>
           </view>
           <view class="info">

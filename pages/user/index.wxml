@@ -2,13 +2,13 @@
 <view>
 	<view class="user-container">
 
-		<view wx:if="{{!userInfo}}">
+		<view wx:if="{{userInfo == null || userInfo.name == 'WX_USER'}}">
 			<view class="userinfo" bindtap="handleLogin">
 				<image class="userinfo-avatar" src="../../images/user/login.png" mode="cover"></image>
 				<text class="userinfo-nickname">点击登录</text>
 			</view>
 		</view>
-		<view wx:if="{{userInfo}}">
+		<view wx:if="{{userInfo != null &&  userInfo.name != 'WX_USER'}}">
 			<view class="userinfo">
 				<image class="userinfo-avatar" src="{{userInfo.profileUrl}}" mode="cover"></image>
 				<text class="userinfo-nickname">{{userInfo.name}}</text>
@@ -19,7 +19,7 @@
 		<view class="info-container">
 			<view class="info-item">
 				<p class="p-number">
-					{{userInfo.point}}
+					{{userInfo.point == null ? 0: userInfo.point}}
 				</p>
 				<p class="p-text">
 					积分
